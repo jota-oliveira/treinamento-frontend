@@ -1,5 +1,6 @@
 import { ObjetoTurma } from './ObjetoTurma';
 import { Aluno } from '../../aluno/entities/Aluno';
+import { Disciplina } from 'disciplina/entities/Disciplina';
 
 export class Turma {
   private _descricao: string;
@@ -7,7 +8,7 @@ export class Turma {
   private _periodoLetivo: number;
   private _numeroVagas: number;
   private _alunos: Aluno[];
-  // Implementar disciplinas;
+  private _disciplinas: Disciplina[];
 
   constructor(turma: ObjetoTurma) {
     this._descricao = turma.descricao;
@@ -15,6 +16,7 @@ export class Turma {
     this._periodoLetivo = turma.periodoLetivo;
     this._numeroVagas = turma.numeroVagas;
     this._alunos = turma.alunos;
+    this._disciplinas = turma.disciplinas;
   }
 
   get descricao(): string {
@@ -51,6 +53,10 @@ export class Turma {
 
   get alunos(): Aluno[] {
     return [...this._alunos];
+  }
+
+  get disciplinas(): Disciplina[] {
+    return [...this._disciplinas];
   }
 
 }

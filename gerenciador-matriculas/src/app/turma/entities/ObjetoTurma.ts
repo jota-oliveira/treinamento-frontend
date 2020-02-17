@@ -1,4 +1,5 @@
 import { Aluno } from '../../aluno/entities/Aluno';
+import { Disciplina } from 'disciplina/entities/Disciplina';
 
 export interface ObjetoTurma {
   descricao: string;
@@ -6,4 +7,5 @@ export interface ObjetoTurma {
   periodoLetivo: number;
   numeroVagas: number;
   alunos: Aluno[];
+  disciplinas: Disciplina[];
 }

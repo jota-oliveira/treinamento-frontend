@@ -1,13 +1,20 @@
 import { ObjetoAluno } from './ObjetoAluno';
 import { Pessoa } from 'entities/Pessoa';
+import { Turma } from 'turma/entities/Turma';
+import { ObjectUnsubscribedError } from 'rxjs';
 
 export class Aluno extends Pessoa {
 
   private _matricula: number;
   private _formaIngresso: string;
+  private _turma: Turma[];
 
-  constructor(pessoa: ObjetoAluno) {
-    super(pessoa);
+  constructor(aluno: ObjetoAluno) {
+    super(aluno);
+
+    this._matricula = aluno.matricula;
+    this._formaIngresso = aluno.formaIngresso;
+    this._turma = aluno.turma;
   }
 
   get matricula(): number {
