@@ -22,4 +22,5 @@ describe('AlunoComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
 });

@@ -33,4 +33,8 @@ export class Aluno extends Pessoa {
     this._formaIngresso = formaIngresso;
   }
 
+  get turma(): Turma[] {
+    return [...this._turma];
+  }
+
 }
