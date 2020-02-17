@@ -3,27 +3,12 @@
 
   <po-menu
     [p-filter]="true"
-    [p-menus]="[
-    {
-      icon: 'po-icon po-icon-home',
-      link: '/',
-      label: 'Início'
-    }
-    ,{
-      icon: 'po-icon po-icon-document-filled',
-      link: 'matriculas',
-      label: 'Matrículas'
-    }]"
+    [p-menus]="menus"
 
   >
   </po-menu>
 
-  <po-page-default p-title="Gerenciador de Matrículas">
-    <p>Gerenciador de matrículas</p>
-
-    <button routerLink="matriculas">Matriculas</button>
-    <button routerLink="">Home</button>
-    
+  <po-page-default>
     <router-outlet></router-outlet>
   </po-page-default>
 </div>
