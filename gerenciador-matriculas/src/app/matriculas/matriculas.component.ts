@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MatriculasService } from './services/matriculas.service';
+import { Matriculas } from './entities/matriculas';
 
 @Component({
   selector: 'app-matriculas',
@@ -7,10 +9,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MatriculasComponent implements OnInit {
 
-  constructor() { }
+  private service: MatriculasService;
+  public matriculas: Matriculas;
+
+  constructor(matriculasService: MatriculasService) {
+    this.service = matriculasService;
+  }
 
   ngOnInit() {
-    /* Buscar matrículas do service... */
+    this.getMatriculas();
+  }
+
+  private getMatriculas(): void {
+    this.service
+      .getMatriculas()
+      .subscribe(matriculas => {
+        this.matriculas = matriculas;
+      });
   }
 
 }

@@ -1,1 +1,7 @@
 <p>Listar matrículas aqui</p>
+
+<ul *ngIf="matriculas">
+  <li *ngFor="let matricula of matriculas.matriculas">
+    Aluno {{ matricula.aluno.nome }}
+  </li>
+</ul>
