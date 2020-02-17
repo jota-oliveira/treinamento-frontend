@@ -1,7 +1,6 @@
 import { ObjetoAluno } from './ObjetoAluno';
 import { Pessoa } from 'entities/Pessoa';
 import { Turma } from 'turma/entities/Turma';
-import { ObjectUnsubscribedError } from 'rxjs';
 
 export class Aluno extends Pessoa {
 
