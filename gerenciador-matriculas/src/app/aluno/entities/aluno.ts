@@ -1,6 +1,6 @@
-import { ObjetoAluno } from './ObjetoAluno';
+import { ObjetoAluno } from './aluno-interface';
 import { Pessoa } from 'entities/Pessoa';
-import { Turma } from 'turma/entities/Turma';
+import { Turma } from 'turma/entities/turma';
 
 export class Aluno extends Pessoa {
 

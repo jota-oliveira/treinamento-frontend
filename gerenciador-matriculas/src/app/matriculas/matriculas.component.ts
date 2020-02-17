@@ -10,6 +10,7 @@ export class MatriculasComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    /* Buscar matrículas do service... */
   }
 
 }

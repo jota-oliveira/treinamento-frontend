@@ -1,6 +1,6 @@
-import { ObjetoDisciplina } from './ObjetoDisciplina';
-import { Professor } from 'professor/entities/Professor';
-import { Turma } from 'turma/entities/Turma';
+import { ObjetoDisciplina } from './disciplina-interface';
+import { Professor } from 'professor/entities/professor';
+import { Turma } from 'turma/entities/turma';
 
 export class Disciplina {
 

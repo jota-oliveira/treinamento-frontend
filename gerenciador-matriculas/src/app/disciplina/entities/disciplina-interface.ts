@@ -1,5 +1,5 @@
-import { Professor } from 'professor/entities/Professor';
-import { Turma } from 'turma/entities/Turma';
+import { Professor } from 'professor/entities/professor';
+import { Turma } from 'turma/entities/turma';
 
 export interface ObjetoDisciplina {
   descricao: string;

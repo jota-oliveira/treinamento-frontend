@@ -1,6 +1,6 @@
-import { ObjetoTurma } from './ObjetoTurma';
-import { Aluno } from '../../aluno/entities/Aluno';
-import { Disciplina } from 'disciplina/entities/Disciplina';
+import { ObjetoTurma } from './turma-interface';
+import { Aluno } from '../../aluno/entities/aluno';
+import { Disciplina } from 'disciplina/entities/disciplina';
 
 export class Turma {
   private _descricao: string;

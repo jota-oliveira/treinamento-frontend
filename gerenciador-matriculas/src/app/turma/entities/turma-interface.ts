@@ -1,5 +1,5 @@
-import { Aluno } from '../../aluno/entities/Aluno';
-import { Disciplina } from 'disciplina/entities/Disciplina';
+import { Aluno } from '../../aluno/entities/aluno';
+import { Disciplina } from 'disciplina/entities/disciplina';
 
 export interface ObjetoTurma {
   descricao: string;

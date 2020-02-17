@@ -1,5 +1,5 @@
-import { Aluno } from './Aluno';
-import { Turma } from '../../turma/entities/Turma';
+import { Aluno } from './aluno';
+import { Turma } from '../../turma/entities/turma';
 
 describe('Modelo de Alunos', () => {
   let aluno: Aluno;

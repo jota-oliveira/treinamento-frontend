@@ -1,6 +1,6 @@
-import { ObjetoProfessor } from './ObjetoProfessor';
+import { ObjetoProfessor } from './professor-interface';
 import { Pessoa } from '../../entities/Pessoa';
-import { Disciplina } from '../../disciplina/entities/Disciplina';
+import { Disciplina } from '../../disciplina/entities/disciplina';
 
 export class Professor extends Pessoa {
 

@@ -1,5 +1,5 @@
 import { ObjetoPessoa } from 'entities/ObjetoPessoa';
-import { Turma } from 'turma/entities/Turma';
+import { Turma } from 'turma/entities/turma';
 
 export interface ObjetoAluno extends ObjetoPessoa {
   matricula: number;
