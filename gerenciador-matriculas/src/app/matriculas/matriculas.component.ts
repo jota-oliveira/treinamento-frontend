@@ -28,12 +28,10 @@ export class MatriculasComponent implements OnInit {
       });
   }
 
-  public listarMatriculasComoObjeto(): any[] {
-
-    return !this.matriculas ? [] : this.matriculas.listarMatriculas()
+  public listarMatriculasComoObjeto = (): any[] =>
+    !this.matriculas ? [] : this.matriculas.listarMatriculas()
       .slice(0, 4)
       .map(matricula => this.converterMatriculaEmObjeto(matricula));
-  }
 
   private converterMatriculaEmObjeto(matricula): object {
     const classeAluno = matricula.aluno;
@@ -50,15 +48,18 @@ export class MatriculasComponent implements OnInit {
     };
   }
 
-  public buscarColunasUltimasMatriculas(): any[] {
-    return [
+  public buscarColunasUltimasMatriculas = (): any[] => [
       { property: 'nomeAluno', label: 'Nome' },
       { property: 'emailAluno', label: 'Email' },
       { property: 'cpfAluno', label: 'Documento' },
       { property: 'turmaAnoLetivo', label: 'Turma' },
       { property: 'turmaDescricao', label: 'Descrição' },
       { property: 'turmaNumeroVagas', label: 'Nº de Vagas' }
-    ];
+  ]
+
+  public novaMatricula = (): void => {
+    console.log('abrir nova matrícula');
+    alert('Nova matrícula em breve!');
   }
 
 }

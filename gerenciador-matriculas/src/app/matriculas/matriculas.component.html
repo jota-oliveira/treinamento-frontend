@@ -1,4 +1,10 @@
-<p>Últimas Matrículas</p>
+<h1 class="dashboard-matriculas-titulo">Últimas Matrículas</h1>
+
+<po-button
+  class="btn-nova-matricula"
+  p-label="Nova matrícula"
+  (p-click)="novaMatricula()">
+</po-button>
 
 <po-table 
   *ngIf="listarMatriculasComoObjeto().length"
