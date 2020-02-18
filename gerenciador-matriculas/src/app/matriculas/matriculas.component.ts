@@ -29,17 +29,36 @@ export class MatriculasComponent implements OnInit {
   }
 
   public listarMatriculasComoObjeto(): any[] {
-    // if (!this.matriculas) {
-      console.log('ok');
-      return [{nome: 'nome'}];
-    // }
 
-    // return this.matriculas.listarMatriculas().map(matricula => {
-    //   return {
-    //     aluno: matricula.aluno,
-    //     turma: matricula.turma
-    //   };
-    // });
+    return !this.matriculas ? [] : this.matriculas.listarMatriculas()
+      .slice(0, 4)
+      .map(matricula => this.converterMatriculaEmObjeto(matricula));
+  }
+
+  private converterMatriculaEmObjeto(matricula): object {
+    const classeAluno = matricula.aluno;
+    const classeTurma = matricula.turma;
+
+    return {
+      nomeAluno: classeAluno.nome,
+      emailAluno: classeAluno.email,
+      cpfAluno: classeAluno.cpf,
+      turmaAnoLetivo: classeTurma.anoLetivo,
+      turmaDescricao: classeTurma.descricao,
+      turmaNumeroVagas: classeTurma.numeroVagas,
+      turmaPeriodoLetivo: classeTurma.periodoLetivo
+    };
+  }
+
+  public buscarColunasUltimasMatriculas(): any[] {
+    return [
+      { property: 'nomeAluno', label: 'Nome' },
+      { property: 'emailAluno', label: 'Email' },
+      { property: 'cpfAluno', label: 'Documento' },
+      { property: 'turmaAnoLetivo', label: 'Turma' },
+      { property: 'turmaDescricao', label: 'Descrição' },
+      { property: 'turmaNumeroVagas', label: 'Nº de Vagas' }
+    ];
   }
 
 }

@@ -1,19 +1,9 @@
-<p>Listar matrículas aqui</p>
+<p>Últimas Matrículas</p>
 
-
-<div *ngIf="listarMatriculasComoObjeto().length">
-  <po-list-view
-    p-property-title="nome"
-    [p-items]="listarMatriculasComoObjeto()">
-
-    <ng-template p-list-view-content-template let-item>
-      <div class="po-row">
-        <po-info
-          class="po-md-12"
-          p-label="Nome"
-          [p-value]="item.nome">
-        </po-info>
-      </div>
-    </ng-template>
-  </po-list-view>
-</div>
+<po-table 
+  *ngIf="listarMatriculasComoObjeto().length"
+  [p-columns]="buscarColunasUltimasMatriculas()"
+  [p-items]="listarMatriculasComoObjeto()"
+  p-sort="true"
+  [p-striped]="true">
+</po-table>
