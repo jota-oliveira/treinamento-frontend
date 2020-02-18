@@ -7,7 +7,7 @@ export class Matriculas {
     this._matriculas = matriculas;
   }
 
-  get matriculas(): Matricula[] {
+  listarMatriculas(): Matricula[] {
     return [...this._matriculas];
   }
 

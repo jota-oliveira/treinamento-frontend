@@ -14,6 +14,8 @@ export class MatriculasService implements MatriculasServiceInterface {
   constructor() { }
 
   getMatriculas(): Observable<Matriculas> {
+    /* Simulação de espera do servidor... */
+
     const aluno = new Aluno({
       nome: 'Fulano',
       cpf: 123,
@@ -38,7 +40,7 @@ export class MatriculasService implements MatriculasServiceInterface {
           new Matriculas(
             [new Matricula(aluno, turma)]
           )
-        ), 3000);
+        ), 1500);
     });
   }
 

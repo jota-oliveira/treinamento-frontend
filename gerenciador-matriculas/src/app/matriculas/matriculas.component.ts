@@ -10,7 +10,7 @@ import { Matriculas } from './entities/matriculas';
 export class MatriculasComponent implements OnInit {
 
   private service: MatriculasService;
-  public matriculas: Matriculas;
+  private matriculas: Matriculas;
 
   constructor(matriculasService: MatriculasService) {
     this.service = matriculasService;
@@ -26,6 +26,20 @@ export class MatriculasComponent implements OnInit {
       .subscribe(matriculas => {
         this.matriculas = matriculas;
       });
+  }
+
+  public listarMatriculasComoObjeto(): any[] {
+    // if (!this.matriculas) {
+      console.log('ok');
+      return [{nome: 'nome'}];
+    // }
+
+    // return this.matriculas.listarMatriculas().map(matricula => {
+    //   return {
+    //     aluno: matricula.aluno,
+    //     turma: matricula.turma
+    //   };
+    // });
   }
 
 }

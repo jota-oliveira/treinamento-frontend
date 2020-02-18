@@ -1,7 +1,19 @@
 <p>Listar matrículas aqui</p>
 
-<ul *ngIf="matriculas">
-  <li *ngFor="let matricula of matriculas.matriculas">
-    Aluno {{ matricula.aluno.nome }}
-  </li>
-</ul>
+
+<div *ngIf="listarMatriculasComoObjeto().length">
+  <po-list-view
+    p-property-title="nome"
+    [p-items]="listarMatriculasComoObjeto()">
+
+    <ng-template p-list-view-content-template let-item>
+      <div class="po-row">
+        <po-info
+          class="po-md-12"
+          p-label="Nome"
+          [p-value]="item.nome">
+        </po-info>
+      </div>
+    </ng-template>
+  </po-list-view>
+</div>
