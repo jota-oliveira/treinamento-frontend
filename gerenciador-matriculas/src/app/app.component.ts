@@ -18,11 +18,11 @@ export class AppComponent {
       icon: 'po-icon po-icon-document-filled',
       link: 'matriculas',
       label: 'Matrículas'
+    },
+    {
+      icon: 'po-icon po-icon-document-filled',
+      link: 'aluno',
+      label: 'aluno'
     }
   ];
-
-  private onClick() {
-    alert('Clicked in menu item')
-  }
-
 }

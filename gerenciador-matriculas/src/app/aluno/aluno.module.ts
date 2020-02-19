@@ -3,10 +3,11 @@ import { CommonModule } from '@angular/common';
 
 import { AlunoRoutingModule } from './aluno-routing.module';
 import { AlunoComponent } from './aluno.component';
+import { CriarAlunoComponent } from './criar-aluno/criar-aluno.component';
 
 
 @NgModule({
-  declarations: [AlunoComponent],
+  declarations: [AlunoComponent, CriarAlunoComponent],
   imports: [
     CommonModule,
     AlunoRoutingModule
