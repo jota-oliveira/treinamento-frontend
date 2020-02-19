@@ -1,16 +1,17 @@
 import { AppPage } from './app.po';
 import { browser, logging } from 'protractor';
 
-describe('workspace-project App', () => {
+describe('página inicial do gerenciador de matriculas', () => {
   let page: AppPage;
 
   beforeEach(() => {
     page = new AppPage();
   });
 
-  it('should display welcome message', () => {
+  it('deve mostrar o título correto', () => {
     page.navigateTo();
-    expect(page.getTitleText()).toEqual('gerenciador-matriculas app is running!');
+    console.log('Página', page);
+    // expect(page.getTitleText()).toEqual('Gerenciador de matrículas');
   });
 
   afterEach(async () => {
