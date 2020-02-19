@@ -12,4 +12,7 @@ export class CriarAlunoComponent implements OnInit {
   ngOnInit() {
   }
 
+  public salvarAluno = (formAluno: any): void => {
+    console.log('dei console aqui de fora', formAluno);
+  }
 }

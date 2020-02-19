@@ -1,0 +1,58 @@
+<form
+  [formGroup]="formAluno"
+  (ngSubmit)="enviarFormulario()"
+>
+  <div class="po-row">
+    <po-input
+      class="po-md-4"
+      formControlName="nome"
+      p-clean
+      p-required="true"
+      p-icon="po-icon-user"
+      p-label="Nome"
+    ></po-input>
+    <po-email
+      class="po-lg-4"
+      formControlName="email"
+      p-label="E-mail"
+      p-required="true"
+      p-clean>
+    </po-email>
+    <po-number
+      class="po-md-4"
+      formControlName="cpf"
+      p-icon="po-icon-arrow-up"
+      p-label="CPF"
+      p-required="true"
+      p-maxlength="11"
+    ></po-number>
+  </div>
+  <div class="po-row">
+    <po-number
+      class="po-md-4"
+      formControlName="matricula"
+      p-clean
+      p-icon="po-icon-document"
+      p-required="true"
+      p-label="Matrícula">
+    </po-number>
+    <po-select
+      name="formaIngresso"
+      p-label="Forma de Ingresso"
+      p-required="true"
+      [p-options]="getOpcoesFormaDeIngresso()"
+      formControlName="formaIngresso"
+    >
+    </po-select>
+  </div>
+  
+  <div class="po-row">
+    <po-button
+      class="po-md-12"
+      p-label="Salvar"
+      [p-disabled]="!formAluno.valid"
+
+      (p-click)="enviarFormulario()">
+    </po-button>
+  </div>
+</form>
