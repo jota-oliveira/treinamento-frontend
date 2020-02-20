@@ -1,4 +1,9 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 import { Aluno } from 'aluno/entities/aluno';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -47,5 +52,9 @@ export class FormAlunoComponent implements OnInit {
     { label: 'Enade', value: 'Enade' },
     { label: 'Vestibular', value: 'Vestibular' },
   ]
+
+  public limparFormulario(): void {
+    this.formAluno.reset();
+  }
 
 }

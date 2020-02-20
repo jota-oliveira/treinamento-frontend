@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AlunoService } from 'aluno/services/aluno.service';
 import { AlunoServiceResponses } from 'aluno/services/aluno.service.responses.interface';
 import { PoNotificationService, PoNotification, PoToasterOrientation } from '@portinari/portinari-ui';
+import { FormAlunoComponent } from 'aluno/form-aluno/form-aluno.component';
 
 @Component({
   selector: 'app-criar-aluno',
@@ -11,6 +12,8 @@ import { PoNotificationService, PoNotification, PoToasterOrientation } from '@po
 export class CriarAlunoComponent implements OnInit {
 
   public processandoRequisicao = false;
+
+  @ViewChild(FormAlunoComponent, {static: false}) formComponent: FormAlunoComponent;
 
   constructor(
     private service: AlunoService,
@@ -27,7 +30,8 @@ export class CriarAlunoComponent implements OnInit {
       .subscribe(
         (response: AlunoServiceResponses) => {
           this.enviarMensagemDeFeedback(response);
-          this.limparFormulario();
+          this.formComponent.limparFormulario();
+          this.fecharTelaDeCarregamento();
         },
         (error: AlunoServiceResponses) => {
           this.enviarMensagemDeFeedback(error);
@@ -36,22 +40,11 @@ export class CriarAlunoComponent implements OnInit {
       );
   }
 
-  private mostrarTelaDeCarregamento(): void {
-    this.processandoRequisicao = true;
-  }
+  private mostrarTelaDeCarregamento = () =>
+    this.processandoRequisicao = true
 
-  private fecharTelaDeCarregamento(): void {
-    this.processandoRequisicao = false;
-  }
-
-  private limparFormulario(): void {
-    console.log(`
-      Disponibilizar no componente Form, um meio de limpá-lo
-      por @inputDecorator...
-    `);
-
-    this.fecharTelaDeCarregamento();
-  }
+  private fecharTelaDeCarregamento = () =>
+    this.processandoRequisicao = false
 
   private enviarMensagemDeFeedback(response: AlunoServiceResponses): void {
     const configuracaoNotificacao = this.getConfiguracaoDeNotificacoes(response.mensagem);
