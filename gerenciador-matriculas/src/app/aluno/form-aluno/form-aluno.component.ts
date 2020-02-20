@@ -37,8 +37,6 @@ export class FormAlunoComponent implements OnInit {
   }
 
   public enviarFormulario(): void {
-    console.log(this.formAluno);
-
     if (!this.formAluno.valid) { return; }
 
     this.salvarAluno.emit(this.formAluno.value);
