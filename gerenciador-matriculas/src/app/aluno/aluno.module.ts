@@ -11,11 +11,14 @@ import {
   PoFieldModule,
   PoButtonModule,
   PoNotificationModule,
-  PoLoadingModule
+  PoLoadingModule,
+  PoDividerModule,
+  PoContainerModule
 } from '@portinari/portinari-ui';
+import { EditarAlunoComponent } from './editar-aluno/editar-aluno.component';
 
 @NgModule({
-  declarations: [AlunoComponent, CriarAlunoComponent, FormAlunoComponent],
+  declarations: [AlunoComponent, CriarAlunoComponent, FormAlunoComponent, EditarAlunoComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -23,6 +26,8 @@ import {
     PoButtonModule,
     PoNotificationModule,
     PoLoadingModule,
+    PoDividerModule,
+    PoContainerModule,
     AlunoRoutingModule
   ]
 })
