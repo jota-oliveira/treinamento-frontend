@@ -5,6 +5,7 @@ import {
   EventEmitter,
 } from '@angular/core';
 import { Aluno } from 'aluno/entities/aluno';
+import { ValidaCPF } from 'utils/form-validators-customizados';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -35,7 +36,7 @@ export class FormAlunoComponent implements OnInit {
     this.formAluno = this.formBuilder.group({
       nome: [aluno.nome, Validators.required],
       email: [aluno.email, [Validators.required, Validators.email]],
-      cpf: [aluno.cpf, Validators.required],
+      cpf: [aluno.cpf, [Validators.required, ValidaCPF]],
       matricula: [aluno.matricula, Validators.required],
       formaIngresso: [aluno.formaIngresso, Validators.required]
     });

@@ -18,14 +18,16 @@
       p-required="true"
       p-clean>
     </po-email>
-    <po-number
+    <po-input
       class="po-md-4"
       formControlName="cpf"
-      p-icon="po-icon-arrow-up"
+      p-icon="po-icon-document-filled"
       p-label="CPF"
       p-required="true"
       p-maxlength="11"
-    ></po-number>
+      p-minlength="11"
+      p-pattern="^[0-9]"
+    ></po-input>
   </div>
   <div class="po-row">
     <po-number
