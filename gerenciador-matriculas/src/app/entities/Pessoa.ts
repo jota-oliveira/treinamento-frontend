@@ -1,12 +1,15 @@
 import { ObjetoPessoa } from './ObjetoPessoa';
+import { Validacoes } from 'utils/validacoes.helper';
 
 export abstract class Pessoa {
 
   private _nome: string;
   private _email: string;
-  private _cpf: number;
+  private _cpf: string;
 
   constructor(pessoa: ObjetoPessoa) {
+    this.cpfValido(pessoa.cpf);
+
     this._nome = pessoa.nome;
     this._email = pessoa.email;
     this._cpf = pessoa.cpf;
@@ -28,11 +31,32 @@ export abstract class Pessoa {
     this._email = email;
   }
 
-  get cpf(): number {
+  get cpf(): string {
     return this._cpf;
   }
 
-  set cpf(cpf: number) {
+  set cpf(cpf: string) {
+    this.cpfValido(cpf);
     this._cpf = cpf;
   }
+
+  private stringContemApenasDigitos(item: string): void {
+    const patternApenasNumeros = /^[0-9]/;
+
+    if (!patternApenasNumeros.test(item)) {
+      throw new Error('Por favor, informe apenas os dígitos do CPF');
+    }
+  }
+
+  private cpfValido = (cpf: string = null): void => {
+    if (cpf) {
+      try {
+          this.stringContemApenasDigitos(cpf);
+          if (!Validacoes.validaCPF(cpf)) { throw new Error('CPF inválido'); }
+      } catch (error) {
+        throw new Error(error);
+      }
+    }
+  }
+
 }

@@ -18,7 +18,7 @@ export class MatriculasService implements MatriculasServiceInterface {
 
     const aluno = new Aluno({
       nome: 'Fulano',
-      cpf: 123,
+      cpf: '11111111111',
       matricula: 123,
       email: 'fulano@provedor.com',
       formaIngresso: 'Enem',

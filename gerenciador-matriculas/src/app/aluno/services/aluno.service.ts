@@ -24,7 +24,7 @@ export class AlunoService {
         observer.next(
           new Aluno({
             nome: 'Aluno 1',
-            cpf: 123,
+            cpf: '11111111111',
             matricula: 123,
             email: 'aluno1@provedor.com',
             formaIngresso: 'Enem',
@@ -55,7 +55,7 @@ export class AlunoService {
 const alunos: Aluno[] = [
   new Aluno({
     nome: 'Aluno 1',
-    cpf: 123,
+    cpf: '11111111111',
     matricula: 123,
     email: 'aluno1@provedor.com',
     formaIngresso: 'Enem',
@@ -63,7 +63,7 @@ const alunos: Aluno[] = [
   }),
   new Aluno({
     nome: 'Aluno 2',
-    cpf: 123,
+    cpf: '11111111111',
     matricula: 123,
     email: 'aluno2@provedor.com',
     formaIngresso: 'Enem',
@@ -71,7 +71,7 @@ const alunos: Aluno[] = [
   }),
   new Aluno({
     nome: 'Aluno 3',
-    cpf: 123,
+    cpf: '11111111111',
     matricula: 123,
     email: 'aluno3@provedor.com',
     formaIngresso: 'Enem',
