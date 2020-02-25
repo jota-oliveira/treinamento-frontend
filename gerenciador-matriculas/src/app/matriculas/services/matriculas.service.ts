@@ -17,6 +17,7 @@ export class MatriculasService implements MatriculasServiceInterface {
     /* Simulação de espera do servidor... */
 
     const aluno = new Aluno({
+      id: 1,
       nome: 'Fulano',
       cpf: '11111111111',
       matricula: 123,

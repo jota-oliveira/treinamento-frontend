@@ -1,28 +1,47 @@
 import { Injectable } from '@angular/core';
 import { Aluno } from 'aluno/entities/aluno';
 import { Observable, throwError, of } from 'rxjs';
-import { mergeMap, retry } from 'rxjs/operators';
+import { mergeMap, retry, catchError } from 'rxjs/operators';
 import { AlunoServiceResponses } from './aluno.service.responses.interface';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AlunoService {
 
-  public getAlunos(): Observable<Aluno[]> {
-    return new Observable((observer) => {
-      setTimeout(() =>
-        observer.next(
-          alunos
-        ), 1500);
-    });
+  private url = 'api/alunos';
+
+  constructor(
+    private http: HttpClient
+  ) { }
+
+  getAlunos(): Observable<any[]> {
+    return this.http.get<any[]>(this.url);
   }
+
+  private handleError<T>(operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+      console.log(error); // log to console instead
+      return of(result as T);
+    };
+  }
+
+  // public getAlunos(): Observable<Aluno[]> {
+  //   return new Observable((observer) => {
+  //     setTimeout(() =>
+  //       observer.next(
+  //         alunos
+  //       ), 1500);
+  //   });
+  // }
 
   public getAluno(id: string): Observable<Aluno> {
     return new Observable((observer) => {
       setTimeout(() =>
         observer.next(
           new Aluno({
+            id: 1,
             nome: 'Aluno 1',
             cpf: '11111111111',
             matricula: 123,
@@ -54,6 +73,7 @@ export class AlunoService {
 
 const alunos: Aluno[] = [
   new Aluno({
+    id: 1,
     nome: 'Aluno 1',
     cpf: '11111111111',
     matricula: 123,
@@ -62,6 +82,7 @@ const alunos: Aluno[] = [
     turma: []
   }),
   new Aluno({
+    id: 2,
     nome: 'Aluno 2',
     cpf: '11111111111',
     matricula: 123,
@@ -70,6 +91,7 @@ const alunos: Aluno[] = [
     turma: []
   }),
   new Aluno({
+    id: 3,
     nome: 'Aluno 3',
     cpf: '11111111111',
     matricula: 123,

@@ -3,6 +3,7 @@ import { Validacoes } from 'utils/validacoes.helper';
 
 export abstract class Pessoa {
 
+  private _id: number;
   private _nome: string;
   private _email: string;
   private _cpf: string;
@@ -10,9 +11,18 @@ export abstract class Pessoa {
   constructor(pessoa: ObjetoPessoa) {
     this.cpfValido(pessoa.cpf);
 
+    this._id = pessoa.id;
     this._nome = pessoa.nome;
     this._email = pessoa.email;
     this._cpf = pessoa.cpf;
+  }
+
+  get id(): number {
+    return this._id;
+  }
+
+  set id(id: number) {
+    this._id = id;
   }
 
   get nome(): string {

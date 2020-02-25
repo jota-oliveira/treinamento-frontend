@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Aluno } from './entities/aluno';
+import { AlunoService } from './services/aluno.service';
 
 @Component({
   selector: 'app-aluno',
@@ -8,7 +9,8 @@ import { Aluno } from './entities/aluno';
 })
 export class AlunoComponent implements OnInit {
 
-  private aluno: Aluno = new Aluno({
+  public aluno: Aluno = new Aluno({
+    id: 1,
     cpf: '06357955906',
     email: 'joao.holiveira@totvs.com.br',
     formaIngresso: 'Enade',
@@ -17,9 +19,20 @@ export class AlunoComponent implements OnInit {
     turma: []
   });
 
-  constructor() { }
+  constructor(private service: AlunoService) { }
 
   ngOnInit() {
+    this.getAlunos();
+  }
+
+  private getAlunos() {
+    console.log(
+      this.service
+        .getAlunos()
+        .subscribe(alunos => {
+          console.log(alunos);
+        })
+    );
   }
 
 }
