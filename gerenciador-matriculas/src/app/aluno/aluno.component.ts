@@ -19,6 +19,9 @@ export class AlunoComponent implements OnInit {
     turma: []
   });
 
+  private alunos: Aluno[] = [];
+  private erroRequisicao = '';
+
   constructor(private service: AlunoService) { }
 
   ngOnInit() {
@@ -26,13 +29,14 @@ export class AlunoComponent implements OnInit {
   }
 
   private getAlunos() {
-    console.log(
-      this.service
-        .getAlunos()
-        .subscribe(alunos => {
-          console.log(alunos);
-        })
-    );
+    this.service
+      .getAlunos()
+      .subscribe(
+        alunos => this.alunos = alunos,
+        error => this.erroRequisicao = error
+      );
   }
+
+  /* Fazer lista de alunos aqui... */
 
 }

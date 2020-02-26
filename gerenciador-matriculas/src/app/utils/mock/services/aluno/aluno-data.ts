@@ -20,8 +20,8 @@ export const AlunoData: ObjetoAluno[] = [
     formaIngresso: 'Vestibular'
   },
   {
-    id: 1,
-    matricula: 1,
+    id: 3,
+    matricula: 3,
     nome: 'Rey Skywalker',
     cpf: '33333333333',
     email: 'rey_skywalker@galaxynet.com',
@@ -29,8 +29,8 @@ export const AlunoData: ObjetoAluno[] = [
     formaIngresso: 'Vestibular'
   },
   {
-    id: 1,
-    matricula: 1,
+    id: 4,
+    matricula: 4,
     nome: 'Yoda Master',
     cpf: '44444444444',
     email: 'yoda_force@galaxynet.com',
