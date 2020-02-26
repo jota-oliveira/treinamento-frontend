@@ -16,9 +16,16 @@ import {
   PoContainerModule
 } from '@portinari/portinari-ui';
 import { EditarAlunoComponent } from './editar-aluno/editar-aluno.component';
+import { GridAlunoComponent } from './grid-aluno/grid-aluno.component';
 
 @NgModule({
-  declarations: [AlunoComponent, CriarAlunoComponent, FormAlunoComponent, EditarAlunoComponent],
+  declarations: [
+    AlunoComponent,
+    CriarAlunoComponent,
+    FormAlunoComponent,
+    EditarAlunoComponent,
+    GridAlunoComponent
+  ],
   imports: [
     CommonModule,
     ReactiveFormsModule,

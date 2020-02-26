@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Aluno } from './entities/aluno';
-import { AlunoService } from './services/aluno.service';
+// import { AlunoService } from './services/aluno.service';
 
 @Component({
   selector: 'app-aluno',
@@ -20,23 +20,21 @@ export class AlunoComponent implements OnInit {
   });
 
   private alunos: Aluno[] = [];
-  private erroRequisicao = '';
+  public erroRequisicao = '';
 
-  constructor(private service: AlunoService) { }
+  // constructor(private service: AlunoService) { }
 
   ngOnInit() {
-    this.getAlunos();
+    // this.getAlunos();
   }
 
-  private getAlunos() {
-    this.service
-      .getAlunos()
-      .subscribe(
-        alunos => this.alunos = alunos,
-        error => this.erroRequisicao = error
-      );
-  }
-
-  /* Fazer lista de alunos aqui... */
+  // private getAlunos() {
+  //   this.service
+  //     .getAlunos()
+  //     .subscribe(
+  //       alunos => this.alunos = alunos,
+  //       error => this.erroRequisicao = error
+  //     );
+  // }
 
 }
