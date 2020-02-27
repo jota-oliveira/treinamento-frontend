@@ -1,1 +1,6 @@
-<p>grid-aluno works!</p>
+<po-table *ngIf="alunosComoObjeto.length"
+  [p-columns]="listaColunasGridAlunos"
+  [p-items]="alunosComoObjeto"
+  p-sort="true"
+  p-striped="true">
+</po-table>

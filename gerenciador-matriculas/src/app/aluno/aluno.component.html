@@ -1,8 +1,32 @@
-<po-divider class="po-md-12" p-label="CRIAR ALUNO"></po-divider>
-<app-criar-aluno></app-criar-aluno>
+<div class="po-row">
+  <po-divider class="po-md-12" p-label="CRIAR"></po-divider>
+</div>
+<div class="po-row">
+  <app-criar-aluno></app-criar-aluno>
+</div>
 
-<po-divider class="po-md-12" p-label="EDITAR ALUNO"></po-divider>
-<app-editar-aluno [aluno]="aluno"></app-editar-aluno>
+<!-- <div>
+  <h3>Editar</h3>
+  <app-editar-aluno
+    [aluno]="aluno">
+  </app-editar-aluno>
+</div> -->
 
-<po-divider class="po-md-12" p-label="LISTAR ALUNO"></po-divider>
-<app-grid-aluno></app-grid-aluno>
+
+<div class="po-row">
+  <po-divider class="po-md-12" p-label="LISTAGEM"></po-divider>
+</div>
+
+<div class="po-row">
+  <div class="po-md-12">
+
+    <div *ngIf="carregandoAlunos">
+      Carregando componente...
+    </div>
+
+    <app-grid-aluno
+      *ngIf="!carregandoAlunos"
+      [alunos]="alunos"
+    ></app-grid-aluno>
+  </div>
+</div>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Aluno } from './entities/aluno';
-// import { AlunoService } from './services/aluno.service';
+import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-aluno',
@@ -9,32 +10,37 @@ import { Aluno } from './entities/aluno';
 })
 export class AlunoComponent implements OnInit {
 
-  public aluno: Aluno = new Aluno({
-    id: 1,
-    cpf: '06357955906',
-    email: 'joao.holiveira@totvs.com.br',
-    formaIngresso: 'Enade',
-    matricula: 3,
-    nome: 'João Henrique de Oliveira Júnior',
-    turma: []
-  });
-
-  private alunos: Aluno[] = [];
+  public alunos: Aluno[] = [];
   public erroRequisicao = '';
+  public carregandoAlunos = true;
+  private alunosObservable$: Observable<Aluno[]>;
 
-  // constructor(private service: AlunoService) { }
+  constructor(private activatedRoute: ActivatedRoute) { }
 
-  ngOnInit() {
-    // this.getAlunos();
+  ngOnInit() { this.getAlunos(); }
+
+  private getAlunos(): void {
+    this.bindAlunosObservable();
+
+    this.alunosObservable$
+      .subscribe(
+        alunos => {
+          this.alunos = alunos;
+          this.carregandoAlunos = false;
+        },
+        error => {
+          this.erroRequisicao = error;
+          this.carregandoAlunos = false;
+        }
+      );
   }
 
-  // private getAlunos() {
-  //   this.service
-  //     .getAlunos()
-  //     .subscribe(
-  //       alunos => this.alunos = alunos,
-  //       error => this.erroRequisicao = error
-  //     );
-  // }
+  private bindAlunosObservable(): void {
+    this.activatedRoute.data
+      .subscribe(data => {
+          this.alunosObservable$ = data.alunos;
+        })
+      .unsubscribe();
+  }
 
 }

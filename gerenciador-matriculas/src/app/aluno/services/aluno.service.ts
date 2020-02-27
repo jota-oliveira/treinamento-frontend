@@ -11,7 +11,7 @@ import { ObjetoAluno } from 'aluno/entities/aluno-interface';
 })
 export class AlunoService {
 
-  private url = 'api/aluns';
+  private url = 'api/alunos';
 
   constructor(private http: HttpClient) { }
 

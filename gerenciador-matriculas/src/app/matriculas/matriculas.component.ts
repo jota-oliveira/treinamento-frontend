@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { MatriculasService } from './services/matriculas.service';
-import { Matriculas } from './entities/matriculas';
 
 @Component({
   selector: 'app-matriculas',
@@ -10,7 +9,7 @@ import { Matriculas } from './entities/matriculas';
 export class MatriculasComponent implements OnInit {
 
   private service: MatriculasService;
-  private matriculas: Matriculas;
+  private _matriculasComoObjeto: any[] = [];
 
   constructor(matriculasService: MatriculasService) {
     this.service = matriculasService;
@@ -24,14 +23,16 @@ export class MatriculasComponent implements OnInit {
     this.service
       .getMatriculas()
       .subscribe(matriculas => {
-        this.matriculas = matriculas;
+        this._matriculasComoObjeto = matriculas
+          .listarMatriculas()
+          .slice(0, 4)
+          .map(matricula => this.converterMatriculaEmObjeto(matricula));
       });
   }
 
-  public listarMatriculasComoObjeto = (): any[] =>
-    !this.matriculas ? [] : this.matriculas.listarMatriculas()
-      .slice(0, 4)
-      .map(matricula => this.converterMatriculaEmObjeto(matricula));
+  get matriculasComoObjeto(): any[] {
+    return [...this._matriculasComoObjeto];
+  }
 
   private converterMatriculaEmObjeto(matricula): object {
     const classeAluno = matricula.aluno;
@@ -48,14 +49,16 @@ export class MatriculasComponent implements OnInit {
     };
   }
 
-  public buscarColunasUltimasMatriculas = (): any[] => [
+  get colunasUltimasMatriculas(): any[] {
+    return [
       { property: 'nomeAluno', label: 'Nome' },
       { property: 'emailAluno', label: 'Email' },
       { property: 'cpfAluno', label: 'Documento' },
       { property: 'turmaAnoLetivo', label: 'Turma' },
       { property: 'turmaDescricao', label: 'Descrição' },
       { property: 'turmaNumeroVagas', label: 'Nº de Vagas' }
-  ]
+    ];
+  }
 
   public novaMatricula = (): void => {
     console.log('abrir nova matrícula');

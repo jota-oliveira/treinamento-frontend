@@ -9,11 +9,9 @@ import { PoModule } from '@portinari/portinari-ui';
   declarations: [SharedComponent],
   imports: [
     CommonModule,
-    PoModule,
     // SharedRoutingModule
   ],
   exports: [
-    PoModule,
     CommonModule
   ]
 })

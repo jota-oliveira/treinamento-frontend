@@ -7,9 +7,9 @@
 </po-button>
 
 <po-table 
-  *ngIf="listarMatriculasComoObjeto().length"
-  [p-columns]="buscarColunasUltimasMatriculas()"
-  [p-items]="listarMatriculasComoObjeto()"
+  *ngIf="matriculasComoObjeto.length"
+  [p-columns]="colunasUltimasMatriculas"
+  [p-items]="matriculasComoObjeto"
   p-sort="true"
   [p-striped]="true">
 </po-table>

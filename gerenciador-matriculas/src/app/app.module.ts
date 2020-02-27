@@ -8,6 +8,7 @@ import { SharedModule } from './shared/shared.module';
 import { HttpClientModule } from '@angular/common/http';
 import { MockDataService } from './utils/mock/mock-data.service';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { PoToolbarModule, PoMenuModule, PoPageModule } from '@portinari/portinari-ui';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,9 @@ import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
     BrowserModule,
     AppRoutingModule,
     SharedModule,
+    PoToolbarModule,
+    PoMenuModule,
+    PoPageModule,
     RouterModule.forRoot([]),
   ],
   providers: [],

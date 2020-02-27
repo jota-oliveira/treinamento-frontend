@@ -1,17 +1,17 @@
 import { Resolve, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
 import { AlunoService } from 'aluno/services/aluno.service';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Aluno } from 'aluno/entities/aluno';
 
-export class AlunoResolver implements Resolve<Aluno[]> {
+export class AlunoResolver implements Resolve<Observable<Aluno[]>> {
 
   constructor(private alunoService: AlunoService) { }
 
   resolve(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
-  ): Observable<Aluno[]> {
-    return this.alunoService.getAlunos();
+  ): Observable<Observable<Aluno[]>> {
+    return of(this.alunoService.getAlunos());
   }
 
 }
