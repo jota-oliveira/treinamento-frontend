@@ -11,17 +11,23 @@ import { Observable } from 'rxjs';
 export class AlunoComponent implements OnInit {
 
   public alunos: Aluno[] = [];
+  public aluno: Aluno = null;
+
   public erroRequisicao = '';
   public carregandoAlunos = true;
+  public carregandoAluno = true;
   private alunosObservable$: Observable<Aluno[]>;
+  private alunoObservable$: Observable<Aluno>;
 
   constructor(private activatedRoute: ActivatedRoute) { }
 
-  ngOnInit() { this.getAlunos(); }
+  ngOnInit() {
+    this.bindObservables();
+    this.getAlunos();
+    this.getAluno();
+  }
 
   private getAlunos(): void {
-    this.bindAlunosObservable();
-
     this.alunosObservable$
       .subscribe(
         alunos => {
@@ -35,10 +41,25 @@ export class AlunoComponent implements OnInit {
       );
   }
 
-  private bindAlunosObservable(): void {
+  private getAluno(): void {
+    this.alunoObservable$
+      .subscribe(
+        aluno => {
+          this.aluno = aluno;
+          this.carregandoAluno = false;
+        },
+        error => {
+          this.erroRequisicao = error;
+          this.carregandoAluno = false;
+        }
+      );
+  }
+
+  private bindObservables(): void {
     this.activatedRoute.data
       .subscribe(data => {
           this.alunosObservable$ = data.alunos;
+          this.alunoObservable$ = data.aluno;
         })
       .unsubscribe();
   }

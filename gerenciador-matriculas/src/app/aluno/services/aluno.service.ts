@@ -28,32 +28,20 @@ export class AlunoService {
     return alunos.map(aluno => new Aluno(aluno));
   }
 
-  private handleError(err: any, recurso: string): Observable<any> {
-    console.error(`Atenção, recurso ${recurso} apresentou o erro: ${err.status} ${err.statusText}`);
-    let mensagemDeErro = 'Não foi possível fazer a requisição';
+  public getAluno(id: number): Observable<Aluno> {
+    const url = `${this.url}/${id}`;
 
-    if (err.status === StatusResponse.NotFound) {
-      mensagemDeErro = 'Não foi possível encontrar o recurso, por favor entre em contato com o suporte';
-    }
-
-    throw new Error(mensagemDeErro);
+    return this.http.get<Aluno>(url)
+      .pipe(
+        retry(2),
+        map(aluno => new Aluno(aluno)),
+        catchError((err: any) => this.handleError(err, 'getAluno'))
+      );
   }
 
-  public getAluno(id: string): Observable<Aluno> {
-    return new Observable((observer) => {
-      setTimeout(() =>
-        observer.next(
-          new Aluno({
-            id: 1,
-            nome: 'Aluno 1',
-            cpf: '11111111111',
-            matricula: 123,
-            email: 'aluno1@provedor.com',
-            formaIngresso: 'Enem',
-            turma: []
-          })
-        ), 1500);
-    });
+  private handleError(err: any, recurso: string): Observable<any> {
+    console.error(`Atenção, recurso ${recurso} apresentou o erro: ${err.status} ${err.statusText}`);
+    throw new Error('Não foi possível fazer a requisição, tente novamente mais tarde');
   }
 
   public postAluno = (aluno: Aluno): Observable<any> => {
@@ -72,9 +60,4 @@ export class AlunoService {
     }).pipe(retry(2));
   }
 
-}
-
-enum StatusResponse {
-  NotFound = 404,
-  ServerError = 500
 }

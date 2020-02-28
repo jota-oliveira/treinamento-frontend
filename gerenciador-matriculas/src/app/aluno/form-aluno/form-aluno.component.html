@@ -1,6 +1,5 @@
 <form
   [formGroup]="formAluno"
-  (ngSubmit)="enviarFormulario()"
 >
   <div class="po-row">
     <po-input
@@ -42,7 +41,7 @@
       name="formaIngresso"
       p-label="Forma de Ingresso"
       p-required="true"
-      [p-options]="getOpcoesFormaDeIngresso()"
+      [p-options]="opcoesFormaDeIngresso"
       formControlName="formaIngresso"
     >
     </po-select>
@@ -53,7 +52,6 @@
       class="po-md-12"
       p-label="Salvar"
       [p-disabled]="!formAluno.valid"
-
       (p-click)="enviarFormulario()">
     </po-button>
   </div>

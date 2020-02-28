@@ -12,27 +12,19 @@ export class GridAlunoComponent implements OnInit {
   private _alunos: Aluno[] = [];
   private _alunosComoObjeto: ObjetoAluno[] = [];
 
-  constructor() {
-    console.log('construtor alunos, alunos como objeto:', this._alunos, this._alunosComoObjeto);
-  }
+  constructor() {}
 
-  ngOnInit() {
-    console.log('Inicializador... ', this._alunos, this._alunosComoObjeto);
-  }
+  ngOnInit() {}
 
   get alunos(): Aluno[] {
-    console.log('Get ALUNOS');
     return [...this._alunos];
   }
 
   @Input() set alunos(value: Aluno[]) {
-    console.log('Chamado o SETTER ALUNOS', value);
     if (value) {
       this._alunos = value;
       this._alunosComoObjeto = value
         .map(aluno => this.converterAlunoParaObjeto(aluno));
-
-      console.log('NOVOS OBJETOS ALUNOS', this._alunos, this._alunosComoObjeto);
     }
   }
 

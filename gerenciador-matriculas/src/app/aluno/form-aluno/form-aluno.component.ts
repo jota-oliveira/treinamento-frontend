@@ -8,6 +8,7 @@ import {
 import { Aluno } from 'aluno/entities/aluno';
 import { ValidaCPF } from 'utils/form-validators-customizados';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { PoSelectOption } from '@portinari/portinari-ui';
 
 @Component({
   selector: 'app-form-aluno',
@@ -17,6 +18,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class FormAlunoComponent implements OnInit {
 
   public formAluno: FormGroup;
+  public opcoesFormaDeIngresso: PoSelectOption[];
 
   @Input() aluno: Aluno;
   @Output() salvarAluno: EventEmitter<any> = new EventEmitter();
@@ -44,6 +46,8 @@ export class FormAlunoComponent implements OnInit {
   }
 
   private criarFormulario(aluno: Aluno) {
+    this.opcoesFormaDeIngresso = this.getOpcoesFormaDeIngresso();
+
     this.formAluno = this.formBuilder.group({
       nome: [aluno.nome, Validators.required],
       email: [aluno.email, [Validators.required, Validators.email]],
@@ -59,14 +63,16 @@ export class FormAlunoComponent implements OnInit {
     this.salvarAluno.emit(this.formAluno.value);
   }
 
-  public getOpcoesFormaDeIngresso = (): any[] => [
-    { label: 'Enem', value: 'Enem' },
-    { label: 'Enade', value: 'Enade' },
-    { label: 'Vestibular', value: 'Vestibular' },
-  ]
-
   public limparFormulario(): void {
     this.formAluno.reset();
+  }
+
+  private getOpcoesFormaDeIngresso(): PoSelectOption[] {
+    return [
+      { label: 'Enem', value: 'Enem' },
+      { label: 'Enade', value: 'Enade' },
+      { label: 'Vestibular', value: 'Vestibular' },
+    ];
   }
 
 }

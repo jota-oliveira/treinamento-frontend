@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { AlunoService } from 'aluno/services/aluno.service';
 import { AlunoServiceResponses } from 'aluno/services/aluno.service.responses.interface';
 import { PoNotificationService, PoNotification, PoToasterOrientation } from '@portinari/portinari-ui';
-import { FormAlunoComponent } from 'aluno/form-aluno/form-aluno.component';
 import { Aluno } from 'aluno/entities/aluno';
 
 @Component({
@@ -13,7 +12,6 @@ import { Aluno } from 'aluno/entities/aluno';
 export class EditarAlunoComponent implements OnInit {
 
   @Input() aluno: Aluno = null;
-  @ViewChild(FormAlunoComponent, { static: false }) formComponent: FormAlunoComponent;
 
   public processandoRequisicao = false;
 
@@ -36,7 +34,6 @@ export class EditarAlunoComponent implements OnInit {
       .subscribe(
         (response: AlunoServiceResponses) => {
           this.enviarMensagemDeFeedback(response);
-          this.formComponent.limparFormulario();
           this.fecharTelaDeCarregamento();
         },
         (error: AlunoServiceResponses) => {

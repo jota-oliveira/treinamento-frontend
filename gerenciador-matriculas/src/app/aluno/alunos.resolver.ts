@@ -3,15 +3,15 @@ import { AlunoService } from 'aluno/services/aluno.service';
 import { Observable, of } from 'rxjs';
 import { Aluno } from 'aluno/entities/aluno';
 
-export class AlunoResolver implements Resolve<Observable<Aluno>> {
+export class AlunosResolver implements Resolve<Observable<Aluno[]>> {
 
   constructor(private alunoService: AlunoService) { }
 
   resolve(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
-  ): Observable<Observable<Aluno>> {
-    return of(this.alunoService.getAluno(1));
+  ): Observable<Observable<Aluno[]>> {
+    return of(this.alunoService.getAlunos());
   }
 
 }

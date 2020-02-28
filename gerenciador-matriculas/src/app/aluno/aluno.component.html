@@ -5,13 +5,21 @@
   <app-criar-aluno></app-criar-aluno>
 </div>
 
-<!-- <div>
-  <h3>Editar</h3>
-  <app-editar-aluno
-    [aluno]="aluno">
-  </app-editar-aluno>
-</div> -->
+<div class="po-row">
+  <po-divider class="po-md-12" p-label="EDITAR"></po-divider>
+</div>
+<div class="po-row">
+  <div class="po-md-12">
+    <div *ngIf="carregandoAluno">
+      Buscando Luke Skywalker
+    </div>
 
+    <app-editar-aluno
+      *ngIf="!(carregandoAluno)"
+      [aluno]="aluno">
+    </app-editar-aluno>
+  </div>
+</div>
 
 <div class="po-row">
   <po-divider class="po-md-12" p-label="LISTAGEM"></po-divider>
@@ -21,7 +29,7 @@
   <div class="po-md-12">
 
     <div *ngIf="carregandoAlunos">
-      Carregando componente...
+      Buscando alunos...
     </div>
 
     <app-grid-aluno
