@@ -11,7 +11,7 @@ export class AlunoResolver implements Resolve<Observable<Aluno>> {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<Observable<Aluno>> {
-    return of(this.alunoService.getAluno(1));
+    return of(this.alunoService.getItem(1));
   }
 
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { AlunoService } from 'aluno/services/aluno.service';
-import { AlunoServiceResponses } from 'aluno/services/aluno.service.responses.interface';
+import { ServiceHttpResponses } from 'services/service.http.responses.interface';
 import { PoNotificationService, PoNotification, PoToasterOrientation } from '@portinari/portinari-ui';
 import { Aluno } from 'aluno/entities/aluno';
 
@@ -32,11 +32,11 @@ export class EditarAlunoComponent implements OnInit {
     this.service
       .postAluno(formAluno)
       .subscribe(
-        (response: AlunoServiceResponses) => {
+        (response: ServiceHttpResponses) => {
           this.enviarMensagemDeFeedback(response);
           this.fecharTelaDeCarregamento();
         },
-        (error: AlunoServiceResponses) => {
+        (error: ServiceHttpResponses) => {
           this.enviarMensagemDeFeedback(error);
           this.fecharTelaDeCarregamento();
         }
@@ -49,7 +49,7 @@ export class EditarAlunoComponent implements OnInit {
   private fecharTelaDeCarregamento = () =>
     this.processandoRequisicao = false
 
-  private enviarMensagemDeFeedback(response: AlunoServiceResponses): void {
+  private enviarMensagemDeFeedback(response: ServiceHttpResponses): void {
     const configuracaoNotificacao = this.getConfiguracaoDeNotificacoes(response.mensagem);
 
     if (response.sucesso) {

@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Aluno } from 'aluno/entities/aluno';
 import { ObjetoAluno } from 'aluno/entities/aluno-interface';
+import { AlunoService } from 'aluno/services/aluno.service';
 
 @Component({
   selector: 'app-grid-aluno',
@@ -11,8 +12,9 @@ export class GridAlunoComponent implements OnInit {
 
   private _alunos: Aluno[] = [];
   private _alunosComoObjeto: ObjetoAluno[] = [];
+  public processandoRequisicao = false;
 
-  constructor() {}
+  constructor(private alunoService: AlunoService) {}
 
   ngOnInit() {}
 
@@ -52,6 +54,27 @@ export class GridAlunoComponent implements OnInit {
       { property: 'email', label: 'E-mail' },
       { property: 'matricula', label: 'Matrícula' }
     ];
+  }
+
+  public deletarRegistro(aluno: ObjetoAluno): void {
+    this.processandoRequisicao = true;
+
+    this.alunoService.delete(aluno.id).subscribe(
+      response => {
+        this.removerAlunoDaLista(aluno);
+        this.processandoRequisicao = false;
+      },
+      erro => {
+        console.log('Erro deletando alunos', erro)
+        this.processandoRequisicao = false;
+      }
+    );
+  }
+
+  private removerAlunoDaLista(aluno: ObjetoAluno): void {
+    const alunos = this.alunos.filter(alunoDaLista => alunoDaLista.id !== aluno.id);
+    this.alunos = alunos;
+    /* Chamar sucesso na operação */
   }
 
 }

@@ -2,5 +2,15 @@
   [p-columns]="listaColunasGridAlunos"
   [p-items]="alunosComoObjeto"
   p-sort="true"
-  p-striped="true">
+  p-striped="true"
+  [p-loading]="processandoRequisicao"
+  [p-actions]="[
+    {
+      action: deletarRegistro,
+      icon: 'po-icon-delete',
+      label: 'Deletar',
+      type: 'danger'
+    }
+  ]"
+>
 </po-table>

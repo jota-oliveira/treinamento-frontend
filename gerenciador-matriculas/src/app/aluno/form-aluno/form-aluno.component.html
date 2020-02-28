@@ -3,7 +3,7 @@
 >
   <div class="po-row">
     <po-input
-      class="po-md-4"
+      class="po-md-4 po-sm-12"
       formControlName="nome"
       p-clean
       p-required="true"
@@ -11,14 +11,14 @@
       p-label="Nome"
     ></po-input>
     <po-email
-      class="po-lg-4"
+      class="po-md-4 po-sm-12"
       formControlName="email"
       p-label="E-mail"
       p-required="true"
       p-clean>
     </po-email>
     <po-input
-      class="po-md-4"
+      class="po-md-4 po-sm-12"
       formControlName="cpf"
       p-icon="po-icon-document-filled"
       p-label="CPF"
@@ -30,7 +30,7 @@
   </div>
   <div class="po-row">
     <po-number
-      class="po-md-4"
+      class="po-md-4 po-sm-12"
       formControlName="matricula"
       p-clean
       p-icon="po-icon-document"
@@ -39,6 +39,7 @@
     </po-number>
     <po-select
       name="formaIngresso"
+      class="po-md-4 po-sm-12"
       p-label="Forma de Ingresso"
       p-required="true"
       [p-options]="opcoesFormaDeIngresso"

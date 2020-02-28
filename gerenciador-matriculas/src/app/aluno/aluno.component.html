@@ -1,40 +1,42 @@
-<div class="po-row">
-  <po-divider class="po-md-12" p-label="CRIAR"></po-divider>
-</div>
-<div class="po-row">
-  <app-criar-aluno></app-criar-aluno>
-</div>
-
-<div class="po-row">
-  <po-divider class="po-md-12" p-label="EDITAR"></po-divider>
-</div>
-<div class="po-row">
-  <div class="po-md-12">
-    <div *ngIf="carregandoAluno">
-      Buscando Luke Skywalker
-    </div>
-
-    <app-editar-aluno
-      *ngIf="!(carregandoAluno)"
-      [aluno]="aluno">
-    </app-editar-aluno>
+<main class="main-content">
+  <div class="po-row">
+    <po-divider class="po-md-12" p-label="CRIAR"></po-divider>
   </div>
-</div>
-
-<div class="po-row">
-  <po-divider class="po-md-12" p-label="LISTAGEM"></po-divider>
-</div>
-
-<div class="po-row">
-  <div class="po-md-12">
-
-    <div *ngIf="carregandoAlunos">
-      Buscando alunos...
-    </div>
-
-    <app-grid-aluno
-      *ngIf="!carregandoAlunos"
-      [alunos]="alunos"
-    ></app-grid-aluno>
+  <div class="po-row">
+    <app-criar-aluno></app-criar-aluno>
   </div>
-</div>
+
+  <div class="po-row">
+    <po-divider class="po-md-12" p-label="EDITAR"></po-divider>
+  </div>
+  <div class="po-row">
+    <div class="po-md-12">
+      <div *ngIf="carregandoAluno">
+        Buscando Luke Skywalker
+      </div>
+
+      <app-editar-aluno
+        *ngIf="!(carregandoAluno)"
+        [aluno]="aluno">
+      </app-editar-aluno>
+    </div>
+  </div>
+
+  <div class="po-row">
+    <po-divider class="po-md-12" p-label="LISTAGEM"></po-divider>
+  </div>
+
+  <div class="po-row">
+    <div class="po-md-12">
+
+      <div *ngIf="carregandoAlunos">
+        Buscando alunos...
+      </div>
+
+      <app-grid-aluno
+        *ngIf="!carregandoAlunos"
+        [alunos]="alunos"
+      ></app-grid-aluno>
+    </div>
+  </div>
+</main>

@@ -1,52 +1,41 @@
 import { Injectable } from '@angular/core';
 import { Aluno } from 'aluno/entities/aluno';
-import { Observable, of, ErrorObserver } from 'rxjs';
-import { retry, catchError, map } from 'rxjs/operators';
-import { AlunoServiceResponses } from './aluno.service.responses.interface';
+import { Observable } from 'rxjs';
+import { retry, map } from 'rxjs/operators';
+import { ServiceHttpResponses } from '../../services/service.http.responses.interface';
 import { HttpClient } from '@angular/common/http';
 import { ObjetoAluno } from 'aluno/entities/aluno-interface';
+import { HttpClientService } from 'services/http-client.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AlunoService {
+export class AlunoService extends HttpClientService<Aluno> {
 
-  private url = 'api/alunos';
+  constructor(private httpService: HttpClient) {
+    super(httpService, 'api/alunos');
+  }
 
-  constructor(private http: HttpClient) { }
-
-  public getAlunos(): Observable<Aluno[]> {
-    return this.http.get<Aluno[]>(this.url)
-      .pipe(
-        retry(2),
-        map(alunos => this.converterAlunosParaModel(alunos)),
-        catchError((err: any) => this.handleError(err, 'getAlunos'))
-      );
+  public getList(filter?: object): Observable<Aluno[]> {
+    return super.getList(filter).pipe(
+      map(alunos => this.converterAlunosParaModel(alunos))
+    );
   }
 
   private converterAlunosParaModel(alunos: ObjetoAluno[]): Aluno[] {
     return alunos.map(aluno => new Aluno(aluno));
   }
 
-  public getAluno(id: number): Observable<Aluno> {
-    const url = `${this.url}/${id}`;
-
-    return this.http.get<Aluno>(url)
-      .pipe(
-        retry(2),
-        map(aluno => new Aluno(aluno)),
-        catchError((err: any) => this.handleError(err, 'getAluno'))
-      );
+  public getItem(id: number): Observable<Aluno> {
+    return super.getItem(id).pipe(
+      map(aluno => new Aluno(aluno))
+    );
   }
 
-  private handleError(err: any, recurso: string): Observable<any> {
-    console.error(`Atenção, recurso ${recurso} apresentou o erro: ${err.status} ${err.statusText}`);
-    throw new Error('Não foi possível fazer a requisição, tente novamente mais tarde');
-  }
-
+  /* Remover em breve... */
   public postAluno = (aluno: Aluno): Observable<any> => {
     return new Observable((observer) => {
-      const response: AlunoServiceResponses = {
+      const response: ServiceHttpResponses = {
         sucesso: false,
         mensagem: 'Você que lute, tentei 3 vezes u.u'
       };

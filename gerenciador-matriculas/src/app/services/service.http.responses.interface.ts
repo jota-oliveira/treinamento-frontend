@@ -1,4 +1,4 @@
-export interface AlunoServiceResponses {
+export interface ServiceHttpResponses {
   sucesso: boolean;
   mensagem: string;
 }
