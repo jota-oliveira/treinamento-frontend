@@ -1,6 +1,6 @@
-import { ObjetoAluno } from 'aluno/entities/aluno-interface';
+import { ObjetoDTOAluno } from 'aluno/entities/aluno-dto-interface';
 
-export const AlunoData: ObjetoAluno[] = [
+export const AlunoData: ObjetoDTOAluno[] = [
   {
     id: 1,
     matricula: 1,

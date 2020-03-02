@@ -1,19 +1,20 @@
-import { ObjetoAluno } from './aluno-interface';
+import { ObjetoDTOAluno } from './aluno-dto-interface';
 import { Pessoa } from 'entities/Pessoa';
 import { Turma } from 'turma/entities/turma';
+import { Modelo } from 'entities/modelo.interface';
 
-export class Aluno extends Pessoa {
+export class Aluno extends Pessoa implements Modelo {
 
   private _matricula: number;
   private _formaIngresso: string;
   private _turma: Turma[];
 
-  constructor(aluno: ObjetoAluno) {
+  constructor(aluno: ObjetoDTOAluno) {
     super(aluno);
 
     this._matricula = aluno.matricula;
     this._formaIngresso = aluno.formaIngresso;
-    this._turma = aluno.turma;
+    this._turma = aluno.turma ? aluno.turma : [];
   }
 
   get matricula(): number {
@@ -34,6 +35,17 @@ export class Aluno extends Pessoa {
 
   get turma(): Turma[] {
     return [...this._turma];
+  }
+
+  public toObjectDTO(): ObjetoDTOAluno {
+    const objetoPessoa = super.toObjectDTO();
+
+    return {
+      ...objetoPessoa,
+      matricula: this.matricula,
+      formaIngresso: this.formaIngresso,
+      turma: this.turma
+    };
   }
 
 }

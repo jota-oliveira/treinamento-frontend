@@ -1,20 +1,29 @@
-import { ObjetoPessoa } from './ObjetoPessoa';
+import { ObjetoDTOPessoa } from './ObjetoPessoa';
 import { Validacoes } from 'utils/validacoes.helper';
+import { Modelo } from './modelo.interface';
 
-export abstract class Pessoa {
+export abstract class Pessoa implements Modelo {
 
-  id: number;
+  private _id: number;
   private _nome: string;
   private _email: string;
   private _cpf: string;
 
-  constructor(pessoa: ObjetoPessoa) {
+  constructor(pessoa: ObjetoDTOPessoa) {
     this.cpfValido(pessoa.cpf);
 
-    this.id = pessoa.id;
+    this._id = pessoa.id;
     this._nome = pessoa.nome;
     this._email = pessoa.email;
     this._cpf = pessoa.cpf;
+  }
+
+  get id(): number {
+    return this._id;
+  }
+
+  set id(id: number) {
+    this._id = id;
   }
 
   get nome(): string {
@@ -59,6 +68,15 @@ export abstract class Pessoa {
         throw new Error(error);
       }
     }
+  }
+
+  public toObjectDTO(): ObjetoDTOPessoa {
+    return {
+      id: this.id,
+      nome: this.nome,
+      email: this.email,
+      cpf: this.cpf
+    };
   }
 
 }

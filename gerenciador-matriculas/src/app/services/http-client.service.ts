@@ -70,7 +70,7 @@ export class HttpClientService<T> implements ServiceHttp<T> {
   }
 
   public put(objeto: T): Observable<ServiceHttpResponses> {
-    return this.http.put<ServiceHttpResponses>(`api/alunos`, objeto, this.httpOptions)
+    return this.http.put<ServiceHttpResponses>(this.url, objeto, this.httpOptions)
       .pipe(
         retry(2),
         map(response => this.serviceResponse),

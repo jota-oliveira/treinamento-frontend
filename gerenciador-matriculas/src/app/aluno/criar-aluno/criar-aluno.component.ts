@@ -5,7 +5,6 @@ import { NotificacaoService } from 'services/notificacoes/notificacao.service';
 import { FormAlunoComponent } from 'aluno/form-aluno/form-aluno.component';
 import { Aluno } from 'aluno/entities/aluno';
 
-
 @Component({
   selector: 'app-criar-aluno',
   templateUrl: './criar-aluno.component.html',
@@ -28,11 +27,17 @@ export class CriarAlunoComponent implements OnInit {
   public salvarAluno = (formAluno: any): void => {
     this.mostrarTelaDeCarregamento();
 
+    const aluno = new Aluno({
+      id: null,
+      ...formAluno,
+      turma: []
+    });
+
     this.service
-      .post(formAluno)
+      .post(aluno.toObjectDTO())
       .subscribe(
         (response: ServiceHttpResponses) => {
-          this.emitirAlunoCriado(response.detalhes, formAluno);
+          this.emitirAlunoCriado(response.detalhes, aluno);
           this.enviarMensagemDeFeedback(response);
           this.formComponent.limparFormulario();
           this.fecharTelaDeCarregamento();
@@ -44,12 +49,9 @@ export class CriarAlunoComponent implements OnInit {
       );
   }
 
-  private emitirAlunoCriado(detalhes: any, formAluno: any): void {
-    this.alunoCriado.emit(new Aluno({
-      id: detalhes.id,
-      ...formAluno,
-      turma: []
-    }));
+  private emitirAlunoCriado(detalhes: any, aluno: Aluno): void {
+    aluno.id = detalhes.id;
+    this.alunoCriado.emit(aluno);
   }
 
   private mostrarTelaDeCarregamento = () =>

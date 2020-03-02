@@ -3,6 +3,7 @@ import { AlunoService } from 'aluno/services/aluno.service';
 import { ServiceHttpResponses } from 'services/service.http.responses.interface';
 import { NotificacaoService } from 'services/notificacoes/notificacao.service';
 import { Aluno } from 'aluno/entities/aluno';
+import { ObjetoDTOAluno } from 'aluno/entities/aluno-dto-interface';
 
 @Component({
   selector: 'app-editar-aluno',
@@ -37,10 +38,10 @@ export class EditarAlunoComponent implements OnInit {
 
   public salvarAluno = (formAluno: any): void => {
     this.mostrarTelaDeCarregamento();
-    const aluno = Object.assign(this.aluno, formAluno);
+    const aluno = Object.assign(this.aluno, formAluno) as Aluno;
 
     this.service
-      .put(aluno)
+      .put(aluno.toObjectDTO())
       .subscribe(
         (response: ServiceHttpResponses) => {
           this.aluno = aluno;

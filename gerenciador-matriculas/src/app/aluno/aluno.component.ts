@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Aluno } from './entities/aluno';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { ObjetoAluno } from './entities/aluno-interface';
+import { ObjetoDTOAluno } from './entities/aluno-dto-interface';
 import { NotificacaoService } from 'services/notificacoes/notificacao.service';
 
 @Component({
@@ -83,7 +83,7 @@ export class AlunoComponent implements OnInit {
       .unsubscribe();
   }
 
-  public removerAluno(alunoParaRemover: ObjetoAluno): void {
+  public removerAluno(alunoParaRemover: ObjetoDTOAluno): void {
     this.alunos = this.alunos
       .filter(alunoDaLista => alunoDaLista.id !== alunoParaRemover.id);
 
@@ -97,8 +97,6 @@ export class AlunoComponent implements OnInit {
   }
 
   public atualizarAluno(alunoParaAtualizar: Aluno): void {
-
-    console.log(alunoParaAtualizar);
     this.alunos = this.alunos.map(aluno => {
       return aluno.id === alunoParaAtualizar.id ? alunoParaAtualizar : aluno;
     });
