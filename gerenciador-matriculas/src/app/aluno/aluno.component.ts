@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Aluno } from './entities/aluno';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
+import { ObjetoAluno } from './entities/aluno-interface';
 
 @Component({
   selector: 'app-aluno',
@@ -13,7 +14,6 @@ export class AlunoComponent implements OnInit {
   public alunos: Aluno[] = [];
   public aluno: Aluno = null;
 
-  public erroRequisicao = '';
   public carregandoAlunos = true;
   public carregandoAluno = true;
   private alunosObservable$: Observable<Aluno[]>;
@@ -35,7 +35,7 @@ export class AlunoComponent implements OnInit {
           this.carregandoAlunos = false;
         },
         error => {
-          this.erroRequisicao = error;
+          // this.erroRequisicao = error;
           this.carregandoAlunos = false;
         }
       );
@@ -49,7 +49,7 @@ export class AlunoComponent implements OnInit {
           this.carregandoAluno = false;
         },
         error => {
-          this.erroRequisicao = error;
+          // this.erroRequisicao = error;
           this.carregandoAluno = false;
         }
       );
@@ -62,6 +62,13 @@ export class AlunoComponent implements OnInit {
           this.alunoObservable$ = data.aluno;
         })
       .unsubscribe();
+  }
+
+  public removerAluno(alunoParaRemover: ObjetoAluno): void {
+    this.alunos = this.alunos
+      .filter(alunoDaLista => alunoDaLista.id !== alunoParaRemover.id);
+
+    if (this.aluno.id === alunoParaRemover.id) { this.aluno = undefined; }
   }
 
 }

@@ -1,7 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
 import { Aluno } from 'aluno/entities/aluno';
 import { ObjetoAluno } from 'aluno/entities/aluno-interface';
 import { AlunoService } from 'aluno/services/aluno.service';
+import { EventEmitter } from '@angular/core';
+import { NotificacaoService } from 'services/notificacoes/notificacao.service';
 
 @Component({
   selector: 'app-grid-aluno',
@@ -10,11 +12,16 @@ import { AlunoService } from 'aluno/services/aluno.service';
 })
 export class GridAlunoComponent implements OnInit {
 
+  @Output() alunoRemovido: EventEmitter<ObjetoAluno> = new EventEmitter();
+
   private _alunos: Aluno[] = [];
   private _alunosComoObjeto: ObjetoAluno[] = [];
   public processandoRequisicao = false;
 
-  constructor(private alunoService: AlunoService) {}
+  constructor(
+    private alunoService: AlunoService,
+    private notificacao: NotificacaoService
+  ) {}
 
   ngOnInit() {}
 
@@ -62,19 +69,21 @@ export class GridAlunoComponent implements OnInit {
     this.alunoService.delete(aluno.id).subscribe(
       response => {
         this.removerAlunoDaLista(aluno);
+        this.alunoRemovido.emit(aluno);
         this.processandoRequisicao = false;
       },
       erro => {
-        console.log('Erro deletando alunos', erro)
+        this.notificacao.mensagemErro(erro);
         this.processandoRequisicao = false;
       }
     );
   }
 
   private removerAlunoDaLista(aluno: ObjetoAluno): void {
-    const alunos = this.alunos.filter(alunoDaLista => alunoDaLista.id !== aluno.id);
-    this.alunos = alunos;
-    /* Chamar sucesso na operação */
+    this.alunos = this.alunos
+      .filter(alunoDaLista => alunoDaLista.id !== aluno.id);
+
+    this.notificacao.mensagemSucesso('Aluno removido com sucesso');
   }
 
 }

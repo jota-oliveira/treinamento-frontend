@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AlunoService } from 'aluno/services/aluno.service';
 import { ServiceHttpResponses } from 'services/service.http.responses.interface';
-import { PoNotificationService, PoNotification, PoToasterOrientation } from '@portinari/portinari-ui';
+import { NotificacaoService } from 'services/notificacoes/notificacao.service';
 import { FormAlunoComponent } from 'aluno/form-aluno/form-aluno.component';
 
 @Component({
@@ -17,7 +17,7 @@ export class CriarAlunoComponent implements OnInit {
 
   constructor(
     private service: AlunoService,
-    public poNotification: PoNotificationService
+    private notificacao: NotificacaoService
   ) {}
 
   ngOnInit() {}
@@ -47,24 +47,13 @@ export class CriarAlunoComponent implements OnInit {
     this.processandoRequisicao = false
 
   private enviarMensagemDeFeedback(response: ServiceHttpResponses): void {
-    const configuracaoNotificacao = this.getConfiguracaoDeNotificacoes(response.mensagem);
-
     if (response.sucesso) {
-      this.poNotification
-        .success(configuracaoNotificacao);
+      this.notificacao
+        .mensagemSucesso(response.mensagem);
     } else {
-      this.poNotification
-        .error(configuracaoNotificacao);
+      this.notificacao
+        .mensagemErro(response.mensagem);
     }
-  }
-
-  private getConfiguracaoDeNotificacoes(mensagem: string): PoNotification {
-    const configuracaoNotificacao: PoNotification = {
-      message: mensagem,
-      orientation: PoToasterOrientation.Top
-    };
-
-    return configuracaoNotificacao;
   }
 
 }
