@@ -3,6 +3,7 @@ import { Aluno } from './entities/aluno';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ObjetoAluno } from './entities/aluno-interface';
+import { NotificacaoService } from 'services/notificacoes/notificacao.service';
 
 @Component({
   selector: 'app-aluno',
@@ -11,23 +12,41 @@ import { ObjetoAluno } from './entities/aluno-interface';
 })
 export class AlunoComponent implements OnInit {
 
-  public alunos: Aluno[] = [];
-  public aluno: Aluno = null;
-
-  public carregandoAlunos = true;
-  public carregandoAluno = true;
+  private _alunos: Aluno[] = [];
+  private _aluno: Aluno = null;
   private alunosObservable$: Observable<Aluno[]>;
   private alunoObservable$: Observable<Aluno>;
+  public carregandoAlunos = true;
+  public carregandoAluno = true;
 
-  constructor(private activatedRoute: ActivatedRoute) { }
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private notificacao: NotificacaoService
+  ) { }
 
   ngOnInit() {
     this.bindObservables();
-    this.getAlunos();
-    this.getAluno();
+    this.getAlunosDoServidor();
+    this.getAlunoDoServidor();
   }
 
-  private getAlunos(): void {
+  get alunos() {
+    return [...this._alunos];
+  }
+
+  set alunos(alunos: Aluno[]) {
+    this._alunos = alunos;
+  }
+
+  get aluno(): Aluno {
+    return this._aluno;
+  }
+
+  set aluno(aluno: Aluno) {
+    this._aluno = aluno;
+  }
+
+  private getAlunosDoServidor(): void {
     this.alunosObservable$
       .subscribe(
         alunos => {
@@ -35,13 +54,13 @@ export class AlunoComponent implements OnInit {
           this.carregandoAlunos = false;
         },
         error => {
-          // this.erroRequisicao = error;
+          this.notificacao.mensagemErro(error);
           this.carregandoAlunos = false;
         }
       );
   }
 
-  private getAluno(): void {
+  private getAlunoDoServidor(): void {
     this.alunoObservable$
       .subscribe(
         aluno => {
@@ -49,7 +68,7 @@ export class AlunoComponent implements OnInit {
           this.carregandoAluno = false;
         },
         error => {
-          // this.erroRequisicao = error;
+          this.notificacao.mensagemErro(error);
           this.carregandoAluno = false;
         }
       );
@@ -69,6 +88,20 @@ export class AlunoComponent implements OnInit {
       .filter(alunoDaLista => alunoDaLista.id !== alunoParaRemover.id);
 
     if (this.aluno.id === alunoParaRemover.id) { this.aluno = undefined; }
+  }
+
+  public adicionarAluno(alunoParaAdicionar: Aluno): void {
+    const alunos = this.alunos;
+    alunos.push(alunoParaAdicionar);
+    this.alunos = alunos;
+  }
+
+  public atualizarAluno(alunoParaAtualizar: Aluno): void {
+
+    console.log(alunoParaAtualizar);
+    this.alunos = this.alunos.map(aluno => {
+      return aluno.id === alunoParaAtualizar.id ? alunoParaAtualizar : aluno;
+    });
   }
 
 }

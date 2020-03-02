@@ -6,15 +6,23 @@ import { Aluno } from 'aluno/entities/aluno';
 @Injectable({
   providedIn: 'root'
 })
-export class MockDataService implements InMemoryDbService{
+export class MockDataService implements InMemoryDbService {
 
   createDb() {
-    return {
-      alunos: AlunoData
-    };
+    return { alunos: AlunoData };
   }
 
-  genId(alunos: Aluno[]): number {
-    return alunos.length > 0 ? Math.max(...alunos.map(aluno => aluno.id)) + 1 : 11;
+  genId<T extends InterfaceId>(collection: T[]): any {
+    return this.calcularNovoId(collection);
   }
+
+  private calcularNovoId<T extends InterfaceId>(collection: T[]) {
+    return collection.reduce((prev, curr) => {
+      return (curr.id + 1) || 0;
+    }, 1);
+  }
+}
+
+interface InterfaceId {
+  id: number;
 }

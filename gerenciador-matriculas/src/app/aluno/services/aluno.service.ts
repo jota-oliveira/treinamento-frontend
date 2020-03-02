@@ -32,21 +32,4 @@ export class AlunoService extends HttpClientService<Aluno> {
     );
   }
 
-  /* Remover em breve... */
-  public postAluno = (aluno: Aluno): Observable<any> => {
-    return new Observable((observer) => {
-      const response: ServiceHttpResponses = {
-        sucesso: false,
-        mensagem: 'Você que lute, tentei 3 vezes u.u'
-      };
-
-      setTimeout(() =>
-        observer
-          .next({ sucesso: true, mensagem: 'Sucesso' })
-        // observer
-        //   .error(response)
-      , 1500);
-    }).pipe(retry(2));
-  }
-
 }

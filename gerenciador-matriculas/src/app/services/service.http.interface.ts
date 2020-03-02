@@ -8,7 +8,7 @@ export interface ServiceHttp<T> {
 
   post(objectToPersist: T): Observable<ServiceHttpResponses>;
 
-  put(id: (number | string), objectToPersist: T): Observable<ServiceHttpResponses>;
+  put(objectToPersist: T): Observable<ServiceHttpResponses>;
 
   delete(id: (number | string)): Observable<ServiceHttpResponses>;
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
 import { AlunoService } from 'aluno/services/aluno.service';
 import { ServiceHttpResponses } from 'services/service.http.responses.interface';
 import { NotificacaoService } from 'services/notificacoes/notificacao.service';
@@ -11,7 +11,8 @@ import { Aluno } from 'aluno/entities/aluno';
 })
 export class EditarAlunoComponent implements OnInit {
 
-  @Input() aluno: Aluno = null;
+  private _aluno: Aluno = null;
+  @Output() private alunoEditado: EventEmitter<Aluno> = new EventEmitter();
 
   public processandoRequisicao = false;
 
@@ -26,18 +27,30 @@ export class EditarAlunoComponent implements OnInit {
     }
   }
 
+  get aluno(): Aluno {
+    return this._aluno;
+  }
+
+  @Input() set aluno(aluno: Aluno) {
+    this._aluno = aluno;
+  }
+
   public salvarAluno = (formAluno: any): void => {
     this.mostrarTelaDeCarregamento();
+    const aluno = Object.assign(this.aluno, formAluno);
 
     this.service
-      .postAluno(formAluno)
+      .put(aluno)
       .subscribe(
         (response: ServiceHttpResponses) => {
+          this.aluno = aluno;
+          this.alunoEditado.emit(this.aluno);
           this.enviarMensagemDeFeedback(response);
           this.fecharTelaDeCarregamento();
         },
-        (error: ServiceHttpResponses) => {
-          this.enviarMensagemDeFeedback(error);
+        (error: string) => {
+          this.notificacao
+            .mensagemErro(error);
           this.fecharTelaDeCarregamento();
         }
       );

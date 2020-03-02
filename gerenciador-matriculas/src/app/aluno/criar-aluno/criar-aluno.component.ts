@@ -1,8 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
 import { AlunoService } from 'aluno/services/aluno.service';
 import { ServiceHttpResponses } from 'services/service.http.responses.interface';
 import { NotificacaoService } from 'services/notificacoes/notificacao.service';
 import { FormAlunoComponent } from 'aluno/form-aluno/form-aluno.component';
+import { Aluno } from 'aluno/entities/aluno';
+
 
 @Component({
   selector: 'app-criar-aluno',
@@ -13,6 +15,7 @@ export class CriarAlunoComponent implements OnInit {
 
   public processandoRequisicao = false;
 
+  @Output() alunoCriado: EventEmitter<Aluno> = new EventEmitter();
   @ViewChild(FormAlunoComponent, {static: false}) formComponent: FormAlunoComponent;
 
   constructor(
@@ -26,9 +29,10 @@ export class CriarAlunoComponent implements OnInit {
     this.mostrarTelaDeCarregamento();
 
     this.service
-      .postAluno(formAluno)
+      .post(formAluno)
       .subscribe(
         (response: ServiceHttpResponses) => {
+          this.emitirAlunoCriado(response.detalhes, formAluno);
           this.enviarMensagemDeFeedback(response);
           this.formComponent.limparFormulario();
           this.fecharTelaDeCarregamento();
@@ -38,6 +42,14 @@ export class CriarAlunoComponent implements OnInit {
           this.fecharTelaDeCarregamento();
         }
       );
+  }
+
+  private emitirAlunoCriado(detalhes: any, formAluno: any): void {
+    this.alunoCriado.emit(new Aluno({
+      id: detalhes.id,
+      ...formAluno,
+      turma: []
+    }));
   }
 
   private mostrarTelaDeCarregamento = () =>

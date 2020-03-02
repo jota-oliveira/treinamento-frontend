@@ -50,24 +50,31 @@ export class HttpClientService<T> implements ServiceHttp<T> {
   }
 
   public post(objeto: T): Observable<ServiceHttpResponses> {
-    const serviceResponse = this.serviceResponse;
 
-    return this.http.post<ServiceHttpResponses>(this.url, this.httpOptions)
+    return this.http.post<ServiceHttpResponses>(this.url, objeto, this.httpOptions)
       .pipe(
         retry(2),
-        map(response => serviceResponse),
+        map(response => this.prepararPostResponse(response)),
         catchError((err: any) => this.handleError(err, 'post'))
       );
   }
 
-  public put(id: string | number, objeto: T): Observable<ServiceHttpResponses> {
+  private prepararPostResponse(response: any): ServiceHttpResponses {
     const serviceResponse = this.serviceResponse;
 
-    return this.http.put<ServiceHttpResponses>(`this.url/${id}`, this.httpOptions)
+    serviceResponse.detalhes = {
+      id: response.id
+    };
+
+    return serviceResponse;
+  }
+
+  public put(objeto: T): Observable<ServiceHttpResponses> {
+    return this.http.put<ServiceHttpResponses>(`api/alunos`, objeto, this.httpOptions)
       .pipe(
         retry(2),
-        map(response => serviceResponse),
-        catchError((err: any) => this.handleError(err, 'post'))
+        map(response => this.serviceResponse),
+        catchError((err: any) => this.handleError(err, 'put'))
       );
   }
 

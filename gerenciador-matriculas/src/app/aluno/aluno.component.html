@@ -3,7 +3,12 @@
     <po-divider class="po-md-12" p-label="CRIAR"></po-divider>
   </div>
   <div class="po-row">
-    <app-criar-aluno></app-criar-aluno>
+    <div class="po-md-12">
+      <app-criar-aluno
+        (alunoCriado)="adicionarAluno($event)"
+      >
+      </app-criar-aluno>
+    </div>
   </div>
 
   <div class="po-row">
@@ -17,7 +22,9 @@
 
       <app-editar-aluno
         *ngIf="!(carregandoAluno)"
-        [aluno]="aluno">
+        [aluno]="aluno"
+        (alunoEditado)="atualizarAluno($event)"
+      >
       </app-editar-aluno>
     </div>
   </div>
