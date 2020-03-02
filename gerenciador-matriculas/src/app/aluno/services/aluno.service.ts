@@ -3,13 +3,13 @@ import { Aluno } from 'aluno/entities/aluno';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
-import { ObjetoDTOAluno } from 'aluno/entities/aluno-dto-interface';
+import { AlunoDTO } from 'aluno/entities/aluno-dto.interface';
 import { HttpClientService } from 'services/http-client.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AlunoService extends HttpClientService<ObjetoDTOAluno> {
+export class AlunoService extends HttpClientService<AlunoDTO> {
 
   constructor(private httpService: HttpClient) {
     super(httpService, 'api/alunos');
@@ -21,7 +21,7 @@ export class AlunoService extends HttpClientService<ObjetoDTOAluno> {
     );
   }
 
-  private converterAlunosParaModel(alunos: ObjetoDTOAluno[]): Aluno[] {
+  private converterAlunosParaModel(alunos: AlunoDTO[]): Aluno[] {
     return alunos.map(aluno => new Aluno(aluno));
   }
 

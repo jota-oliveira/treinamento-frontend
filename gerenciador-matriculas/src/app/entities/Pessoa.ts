@@ -1,4 +1,4 @@
-import { ObjetoDTOPessoa } from './ObjetoPessoa';
+import { PessoaDTO } from './pessoa-dto.interface';
 import { Validacoes } from 'utils/validacoes.helper';
 import { Modelo } from './modelo.interface';
 
@@ -9,7 +9,7 @@ export abstract class Pessoa implements Modelo {
   private _email: string;
   private _cpf: string;
 
-  constructor(pessoa: ObjetoDTOPessoa) {
+  constructor(pessoa: PessoaDTO) {
     this.cpfValido(pessoa.cpf);
 
     this._id = pessoa.id;
@@ -70,7 +70,7 @@ export abstract class Pessoa implements Modelo {
     }
   }
 
-  public toObjectDTO(): ObjetoDTOPessoa {
+  public toObjectDTO(): PessoaDTO {
     return {
       id: this.id,
       nome: this.nome,

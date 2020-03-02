@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output } from '@angular/core';
 import { Aluno } from 'aluno/entities/aluno';
-import { ObjetoDTOAluno } from 'aluno/entities/aluno-dto-interface';
+import { AlunoDTO } from 'aluno/entities/aluno-dto.interface';
 import { AlunoService } from 'aluno/services/aluno.service';
 import { EventEmitter } from '@angular/core';
 import { NotificacaoService } from 'services/notificacoes/notificacao.service';
@@ -12,10 +12,10 @@ import { NotificacaoService } from 'services/notificacoes/notificacao.service';
 })
 export class GridAlunoComponent implements OnInit {
 
-  @Output() alunoRemovido: EventEmitter<ObjetoDTOAluno> = new EventEmitter();
+  @Output() alunoRemovido: EventEmitter<AlunoDTO> = new EventEmitter();
 
   private _alunos: Aluno[] = [];
-  private _alunosComoObjeto: ObjetoDTOAluno[] = [];
+  private _alunosComoObjeto: AlunoDTO[] = [];
   public processandoRequisicao = false;
 
   constructor(
@@ -37,11 +37,11 @@ export class GridAlunoComponent implements OnInit {
     }
   }
 
-  get alunosComoObjeto(): ObjetoDTOAluno[] {
+  get alunosComoObjeto(): AlunoDTO[] {
     return [...this._alunosComoObjeto];
   }
 
-  private converterAlunoParaObjeto(aluno: Aluno): ObjetoDTOAluno {
+  private converterAlunoParaObjeto(aluno: Aluno): AlunoDTO {
     return {
       id: aluno.id,
       nome: aluno.nome,
@@ -63,7 +63,7 @@ export class GridAlunoComponent implements OnInit {
     ];
   }
 
-  public deletarRegistro(aluno: ObjetoDTOAluno): void {
+  public deletarRegistro(aluno: AlunoDTO): void {
     this.processandoRequisicao = true;
 
     this.alunoService.delete(aluno.id).subscribe(
@@ -79,7 +79,7 @@ export class GridAlunoComponent implements OnInit {
     );
   }
 
-  private removerAlunoDaLista(aluno: ObjetoDTOAluno): void {
+  private removerAlunoDaLista(aluno: AlunoDTO): void {
     this.alunos = this.alunos
       .filter(alunoDaLista => alunoDaLista.id !== aluno.id);
 

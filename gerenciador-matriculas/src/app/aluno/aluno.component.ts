@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Aluno } from './entities/aluno';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { ObjetoDTOAluno } from './entities/aluno-dto-interface';
+import { AlunoDTO } from './entities/aluno-dto.interface';
 import { NotificacaoService } from 'services/notificacoes/notificacao.service';
 
 @Component({
@@ -83,7 +83,7 @@ export class AlunoComponent implements OnInit {
       .unsubscribe();
   }
 
-  public removerAluno(alunoParaRemover: ObjetoDTOAluno): void {
+  public removerAluno(alunoParaRemover: AlunoDTO): void {
     this.alunos = this.alunos
       .filter(alunoDaLista => alunoDaLista.id !== alunoParaRemover.id);
 

@@ -3,7 +3,7 @@ import { AlunoService } from 'aluno/services/aluno.service';
 import { ServiceHttpResponses } from 'services/service.http.responses.interface';
 import { NotificacaoService } from 'services/notificacoes/notificacao.service';
 import { Aluno } from 'aluno/entities/aluno';
-import { ObjetoDTOAluno } from 'aluno/entities/aluno-dto-interface';
+import { AlunoDTO } from 'aluno/entities/aluno-dto.interface';
 
 @Component({
   selector: 'app-editar-aluno',
