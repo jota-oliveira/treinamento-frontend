@@ -3,7 +3,7 @@ import { Aluno } from 'aluno/entities/aluno';
 import { AlunoDTO } from 'aluno/entities/aluno-dto.interface';
 import { AlunoService } from 'aluno/services/aluno.service';
 import { EventEmitter } from '@angular/core';
-import { NotificacaoService } from 'services/notificacoes/notificacao.service';
+import { NotificacaoFactoryService } from 'services/notificacoes/notificacao-factory.service';
 
 @Component({
   selector: 'app-grid-aluno',
@@ -15,12 +15,11 @@ export class GridAlunoComponent implements OnInit {
   @Output() alunoRemovido: EventEmitter<AlunoDTO> = new EventEmitter();
 
   private _alunos: Aluno[] = [];
-  private _alunosComoObjeto: AlunoDTO[] = [];
   public processandoRequisicao = false;
 
   constructor(
     private alunoService: AlunoService,
-    private notificacao: NotificacaoService
+    private notificacao: NotificacaoFactoryService
   ) {}
 
   ngOnInit() {}
@@ -32,25 +31,11 @@ export class GridAlunoComponent implements OnInit {
   @Input() set alunos(value: Aluno[]) {
     if (value) {
       this._alunos = value;
-      this._alunosComoObjeto = value
-        .map(aluno => this.converterAlunoParaObjeto(aluno));
     }
   }
 
   get alunosComoObjeto(): AlunoDTO[] {
-    return [...this._alunosComoObjeto];
-  }
-
-  private converterAlunoParaObjeto(aluno: Aluno): AlunoDTO {
-    return {
-      id: aluno.id,
-      nome: aluno.nome,
-      email: aluno.email,
-      cpf: aluno.cpf,
-      matricula: aluno.matricula,
-      formaIngresso: aluno.formaIngresso,
-      turma: aluno.turma
-    };
+    return this.alunos.map(aluno => aluno.toObjectDTO());
   }
 
   get listaColunasGridAlunos(): any[] {
@@ -67,7 +52,7 @@ export class GridAlunoComponent implements OnInit {
     this.processandoRequisicao = true;
 
     this.alunoService.delete(aluno.id).subscribe(
-      response => {
+      _response => {
         this.removerAlunoDaLista(aluno);
         this.alunoRemovido.emit(aluno);
         this.processandoRequisicao = false;

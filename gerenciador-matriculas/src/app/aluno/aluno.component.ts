@@ -3,7 +3,7 @@ import { Aluno } from './entities/aluno';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AlunoDTO } from './entities/aluno-dto.interface';
-import { NotificacaoService } from 'services/notificacoes/notificacao.service';
+import { NotificacaoFactoryService } from 'services/notificacoes/notificacao-factory.service';
 
 @Component({
   selector: 'app-aluno',
@@ -21,7 +21,7 @@ export class AlunoComponent implements OnInit {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private notificacao: NotificacaoService
+    private notificacao: NotificacaoFactoryService
   ) { }
 
   ngOnInit() {

@@ -1,19 +1,17 @@
-<po-loading-overlay
-  *ngIf="processandoRequisicao">
+<po-loading-overlay *ngIf="processandoRequisicao">
 </po-loading-overlay>
 
-<div *ngIf="!(aluno)" >
+<div *ngIf="!(professor)">
   <po-container>
     <b>Ops!</b> Achamos que você tentou implementar
     esse formulário de forma errada, por favor, verifique a documentação...
   </po-container>
 </div>
 
-<div *ngIf="aluno">
-  <app-form-aluno
-    
+<div *ngIf="professor">
+  <app-form-professor
     (eventoSalvar)="salvar($event)"
-    [aluno]="aluno"
+    [professor]="professor"
   >
-  </app-form-aluno>
+  </app-form-professor>
 </div>

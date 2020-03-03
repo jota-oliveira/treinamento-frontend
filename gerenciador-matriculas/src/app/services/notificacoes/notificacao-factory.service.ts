@@ -4,7 +4,7 @@ import { PoNotificationService, PoNotification, PoToasterOrientation } from '@po
 @Injectable({
   providedIn: 'root'
 })
-export class NotificacaoService {
+export class NotificacaoFactoryService {
 
   constructor(
     private poNotification: PoNotificationService

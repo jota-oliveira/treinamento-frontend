@@ -1,4 +1,63 @@
-<p>professor works!</p>
+<main class="main-content">
+  <div class="po-row">
+    <po-divider
+      class="po-md-12"
+      p-label="CRIAR"
+    >
+    </po-divider>
+  </div>
+  <div class="po-row">
+    <div class="po-md-12">
+      <app-criar-professor (professorCriado)="adicionarProfessor($event)">
+      </app-criar-professor>
+    </div>
+  </div>
 
+  <div class="po-row">
+    <po-divider
+      class="po-md-12"
+      p-label="EDITAR"
+    >
+    </po-divider>
+  </div>
 
-<app-form-professor></app-form-professor>
+  <div class="po-row">
+    <div class="po-md-12">
+      <div *ngIf="carregandoProfessor">
+        Buscando professor 1
+      </div>
+
+      <app-editar-professor
+        *ngIf="!(carregandoProfessor)"
+        [professor]="professor"
+        (professorEditado)="atualizarProfessor($event)"
+      >
+      </app-editar-professor>
+    </div>
+  </div>
+
+  <div class="po-row">
+    <po-divider
+      class="po-md-12"
+      p-label="LISTAGEM"
+    >
+    </po-divider>
+  </div>
+
+  <div class="po-row">
+    <div class="po-md-12">
+
+      <div *ngIf="carregandoProfessores">
+        Buscando professor...
+      </div>
+
+      <app-grid-professor
+        (professorRemovido)="removerProfessor($event)"
+        *ngIf="!carregandoProfessores"
+        [professores]="professores"
+      >
+      </app-grid-professor>
+    </div>
+  </div>
+
+</main> 

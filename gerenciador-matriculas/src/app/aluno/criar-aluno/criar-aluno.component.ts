@@ -1,16 +1,17 @@
 import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
 import { AlunoService } from 'aluno/services/aluno.service';
 import { ServiceHttpResponses } from 'services/service.http.responses.interface';
-import { NotificacaoService } from 'services/notificacoes/notificacao.service';
+import { NotificacaoFactoryService } from 'services/notificacoes/notificacao-factory.service';
 import { FormAlunoComponent } from 'aluno/form-aluno/form-aluno.component';
 import { Aluno } from 'aluno/entities/aluno';
+import { HandleFormBaseComponent } from 'utils/forms/handle-form-base.component';
 
 @Component({
   selector: 'app-criar-aluno',
   templateUrl: './criar-aluno.component.html',
   styleUrls: ['./criar-aluno.component.css']
 })
-export class CriarAlunoComponent implements OnInit {
+export class CriarAlunoComponent extends HandleFormBaseComponent implements OnInit {
 
   public processandoRequisicao = false;
 
@@ -19,12 +20,14 @@ export class CriarAlunoComponent implements OnInit {
 
   constructor(
     private service: AlunoService,
-    private notificacao: NotificacaoService
-  ) {}
+    private notificacaoService: NotificacaoFactoryService
+  ) {
+    super(notificacaoService);
+  }
 
   ngOnInit() {}
 
-  public salvarAluno = (formAluno: any): void => {
+  public salvar = (formAluno: any): void => {
     this.mostrarTelaDeCarregamento();
 
     const aluno = new Aluno({
@@ -52,22 +55,6 @@ export class CriarAlunoComponent implements OnInit {
   private emitirAlunoCriado(detalhes: any, aluno: Aluno): void {
     aluno.id = detalhes.id;
     this.alunoCriado.emit(aluno);
-  }
-
-  private mostrarTelaDeCarregamento = () =>
-    this.processandoRequisicao = true
-
-  private fecharTelaDeCarregamento = () =>
-    this.processandoRequisicao = false
-
-  private enviarMensagemDeFeedback(response: ServiceHttpResponses): void {
-    if (response.sucesso) {
-      this.notificacao
-        .mensagemSucesso(response.mensagem);
-    } else {
-      this.notificacao
-        .mensagemErro(response.mensagem);
-    }
   }
 
 }

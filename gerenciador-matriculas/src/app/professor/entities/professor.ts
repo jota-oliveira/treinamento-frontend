@@ -1,13 +1,14 @@
-import { ObjetoProfessor } from './professor-dto-interface';
+import { ProfessorDTO } from './professor-dto.interface';
 import { Pessoa } from '../../entities/Pessoa';
 import { Disciplina } from '../../disciplina/entities/disciplina';
+import { Modelo } from 'entities/modelo.interface';
 
-export class Professor extends Pessoa {
+export class Professor extends Pessoa implements Modelo {
 
   private _titulacao: string;
   private _disciplina: Disciplina[];
 
-  constructor(professor: ObjetoProfessor) {
+  constructor(professor: ProfessorDTO) {
     super(professor);
 
     this._titulacao = professor.titulacao;
@@ -24,6 +25,16 @@ export class Professor extends Pessoa {
 
   get disciplina(): Disciplina[] {
     return [...this._disciplina];
+  }
+
+  public toObjectDTO(): ProfessorDTO {
+    const objetoPessoa = super.toObjectDTO();
+
+    return {
+      ...objetoPessoa,
+      titulacao: this.titulacao,
+      disciplina: this.disciplina
+    };
   }
 
 }

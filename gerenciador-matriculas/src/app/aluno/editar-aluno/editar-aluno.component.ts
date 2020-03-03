@@ -1,16 +1,16 @@
-import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { AlunoService } from 'aluno/services/aluno.service';
 import { ServiceHttpResponses } from 'services/service.http.responses.interface';
-import { NotificacaoService } from 'services/notificacoes/notificacao.service';
+import { NotificacaoFactoryService } from 'services/notificacoes/notificacao-factory.service';
 import { Aluno } from 'aluno/entities/aluno';
-import { AlunoDTO } from 'aluno/entities/aluno-dto.interface';
+import { HandleFormBaseComponent } from 'utils/forms/handle-form-base.component';
 
 @Component({
   selector: 'app-editar-aluno',
   templateUrl: './editar-aluno.component.html',
   styleUrls: ['./editar-aluno.component.css']
 })
-export class EditarAlunoComponent implements OnInit {
+export class EditarAlunoComponent extends HandleFormBaseComponent implements OnInit {
 
   private _aluno: Aluno = null;
   @Output() private alunoEditado: EventEmitter<Aluno> = new EventEmitter();
@@ -19,8 +19,10 @@ export class EditarAlunoComponent implements OnInit {
 
   constructor(
     private service: AlunoService,
-    public notificacao: NotificacaoService
-  ) {}
+    public notificacaoService: NotificacaoFactoryService
+  ) {
+    super(notificacaoService);
+  }
 
   ngOnInit() {
     if (!this.aluno) {
@@ -36,7 +38,7 @@ export class EditarAlunoComponent implements OnInit {
     this._aluno = aluno;
   }
 
-  public salvarAluno = (formAluno: any): void => {
+  public salvar = (formAluno: any): void => {
     this.mostrarTelaDeCarregamento();
     const aluno = Object.assign(this.aluno, formAluno) as Aluno;
 
@@ -55,22 +57,6 @@ export class EditarAlunoComponent implements OnInit {
           this.fecharTelaDeCarregamento();
         }
       );
-  }
-
-  private mostrarTelaDeCarregamento = () =>
-    this.processandoRequisicao = true
-
-  private fecharTelaDeCarregamento = () =>
-    this.processandoRequisicao = false
-
-  private enviarMensagemDeFeedback(response: ServiceHttpResponses): void {
-    if (response.sucesso) {
-      this.notificacao
-        .mensagemSucesso(response.mensagem);
-    } else {
-      this.notificacao
-        .mensagemErro(response.mensagem);
-    }
   }
 
 }

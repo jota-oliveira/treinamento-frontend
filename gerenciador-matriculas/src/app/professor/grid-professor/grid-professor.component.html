@@ -1,0 +1,15 @@
+<po-table
+  *ngIf="professoresComoObjeto.length"
+  [p-columns]="listaColunasGridProfessores"
+  [p-items]="professoresComoObjeto"
+  p-sort="true"
+  p-striped="true"
+  [p-loading]="processandoRequisicao"
+  [p-actions]="[{
+    action: deletarRegistro,
+    icon: 'po-icon-delete',
+    label: 'Deletar',
+    type: 'danger'
+  }]"
+>
+</po-table>
