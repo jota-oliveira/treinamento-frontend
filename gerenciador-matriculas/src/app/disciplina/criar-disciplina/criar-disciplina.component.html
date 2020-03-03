@@ -1,1 +1,5 @@
-<p>criar-disciplina works!</p>
+<po-loading-overlay *ngIf="processandoRequisicao">
+</po-loading-overlay>
+
+<app-form-disciplina (eventoSalvar)="salvar($event)">
+</app-form-disciplina>

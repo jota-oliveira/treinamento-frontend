@@ -28,6 +28,11 @@ export class AppComponent {
       icon: 'po-icon po-icon-document-filled',
       link: 'professor',
       label: 'professor'
+    },
+    {
+      icon: 'po-icon po-icon-document-filled',
+      link: 'disciplina',
+      label: 'disciplina'
     }
   ];
 }

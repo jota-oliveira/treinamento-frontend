@@ -1,1 +1,57 @@
-<p>disciplina works!</p>
+<main class="main-content">
+  <div class="po-row">
+    <po-divider
+      class="po-md-12"
+      p-label="CRIAR">
+    </po-divider>
+  </div>
+  <div class="po-row">
+    <div class="po-md-12">
+      <app-criar-disciplina (disciplinaCriada)="adicionarDisciplina($event)">
+      </app-criar-disciplina>
+    </div>
+  </div>
+
+  <div class="po-row">
+    <po-divider
+      class="po-md-12"
+      p-label="EDITAR">
+    </po-divider>
+  </div>
+
+  <div class="po-row">
+    <div class="po-md-12">
+      <div *ngIf="carregandoDisciplina">
+        Buscando a primeira disciplina
+      </div>
+
+      <app-editar-disciplina
+        *ngIf="!(carregandoDisciplina)"
+        [disciplina]="disciplina"
+        (disciplinaEditada)="atualizarDisciplina($event)">
+      </app-editar-disciplina>
+    </div>
+  </div>
+
+  <div class="po-row">
+    <po-divider
+      class="po-md-12"
+      p-label="LISTAGEM"
+    ></po-divider>
+  </div>
+
+  <div class="po-row">
+    <div class="po-md-12">
+
+      <div *ngIf="carregandoDisciplinas">
+        Buscando disciplinas...
+      </div>
+
+      <app-grid-disciplina
+        (disciplinaRemovida)="removerDisciplina($event)"
+        *ngIf="!carregandoDisciplinas"
+        [disciplinas]="disciplinas"
+      ></app-grid-disciplina>
+    </div>
+  </div>
+</main>
