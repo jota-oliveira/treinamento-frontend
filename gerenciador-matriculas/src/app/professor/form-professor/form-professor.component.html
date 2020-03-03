@@ -1,0 +1,50 @@
+<form [formGroup]="form">
+  <div class="po-row">
+    <po-input
+      class="po-lg-3 po-md-6 po-sm-12"
+      formControlName="nome"
+      p-clean
+      p-required="true"
+      p-icon="po-icon-user"
+      p-label="Nome">
+    </po-input>
+    
+    <po-email
+      class="po-lg-3 po-md-6 po-sm-12"
+      formControlName="email"
+      p-label="E-mail"
+      p-required="true"
+      p-clean>
+    </po-email>
+
+    <po-input
+      class="po-lg-3 po-md-6 po-sm-12"
+      formControlName="cpf"
+      p-icon="po-icon-document-filled"
+      p-label="CPF"
+      p-required="true"
+      p-maxlength="11"
+      p-minlength="11"
+      p-pattern="^[0-9]"
+    ></po-input>
+    
+    <po-input
+      class="po-lg-3 po-md-6 po-sm-12"
+      formControlName="titulacao"
+      p-clean p-required="true"
+      p-icon="po-icon-user"
+      p-label="Titulação"
+    >
+    </po-input>
+  </div>
+
+  <div class="po-row">
+    <po-button
+      class="po-md-12"
+      p-label="Salvar"
+      [p-disabled]="!form.valid"
+      (p-click)="enviarFormulario()"
+    >
+    </po-button>
+  </div>
+</form>

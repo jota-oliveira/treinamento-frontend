@@ -1,5 +1,5 @@
 <form
-  [formGroup]="formAluno"
+  [formGroup]="form"
 >
   <div class="po-row">
     <po-input
@@ -52,7 +52,7 @@
     <po-button
       class="po-md-12"
       p-label="Salvar"
-      [p-disabled]="!formAluno.valid"
+      [p-disabled]="!form.valid"
       (p-click)="enviarFormulario()">
     </po-button>
   </div>

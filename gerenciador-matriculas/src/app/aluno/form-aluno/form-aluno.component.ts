@@ -1,29 +1,24 @@
-import {
-  Component,
-  OnInit,
-  Output,
-  EventEmitter,
-  Input
-} from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Aluno } from 'aluno/entities/aluno';
 import { ValidaCPF } from 'utils/form-validators-customizados';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PoSelectOption } from '@portinari/portinari-ui';
+import { FormBaseComponent } from 'utils/forms/form-base-component';
 
 @Component({
   selector: 'app-form-aluno',
   templateUrl: './form-aluno.component.html',
   styleUrls: ['./form-aluno.component.css']
 })
-export class FormAlunoComponent implements OnInit {
+export class FormAlunoComponent extends FormBaseComponent implements OnInit {
 
-  public formAluno: FormGroup;
   public opcoesFormaDeIngresso: PoSelectOption[];
 
   @Input() aluno: Aluno;
-  @Output() salvarAluno: EventEmitter<any> = new EventEmitter();
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder) {
+    super();
+  }
 
   ngOnInit() {
     this.criarFormulario(
@@ -48,23 +43,13 @@ export class FormAlunoComponent implements OnInit {
   private criarFormulario(aluno: Aluno) {
     this.opcoesFormaDeIngresso = this.getOpcoesFormaDeIngresso();
 
-    this.formAluno = this.formBuilder.group({
+    this.form = this.formBuilder.group({
       nome: [aluno.nome, Validators.required],
       email: [aluno.email, [Validators.required, Validators.email]],
       cpf: [aluno.cpf, [Validators.required, ValidaCPF]],
       matricula: [aluno.matricula, Validators.required],
       formaIngresso: [aluno.formaIngresso, Validators.required]
     });
-  }
-
-  public enviarFormulario(): void {
-    if (!this.formAluno.valid) { return; }
-
-    this.salvarAluno.emit(this.formAluno.value);
-  }
-
-  public limparFormulario(): void {
-    this.formAluno.reset();
   }
 
   private getOpcoesFormaDeIngresso(): PoSelectOption[] {

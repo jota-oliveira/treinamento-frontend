@@ -1,4 +1,4 @@
-import { ObjetoProfessor } from './professor-interface';
+import { ObjetoProfessor } from './professor-dto-interface';
 import { Pessoa } from '../../entities/Pessoa';
 import { Disciplina } from '../../disciplina/entities/disciplina';
 
