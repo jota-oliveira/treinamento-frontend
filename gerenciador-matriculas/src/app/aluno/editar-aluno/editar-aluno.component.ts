@@ -15,8 +15,6 @@ export class EditarAlunoComponent extends HandleFormBaseComponent implements OnI
   private _aluno: Aluno = null;
   @Output() private alunoEditado: EventEmitter<Aluno> = new EventEmitter();
 
-  public processandoRequisicao = false;
-
   constructor(
     private service: AlunoService,
     public notificacaoService: NotificacaoFactoryService

@@ -1,8 +1,9 @@
 import { DisciplinaDTO } from './disciplina-dto.interface';
 import { Professor } from 'professor/entities/professor';
 import { Turma } from 'turma/entities/turma';
+import { Modelo } from 'entities/modelo.interface';
 
-export class Disciplina {
+export class Disciplina implements Modelo {
 
   private _id: number;
   private _descricao: string;
@@ -62,6 +63,17 @@ export class Disciplina {
 
   get turma(): Turma[] {
     return this._turma;
+  }
+
+  public toObjectDTO(): DisciplinaDTO {
+    return {
+      id: this.id,
+      descricao: this.descricao,
+      sigla: this.sigla,
+      cargaHoraria: this.cargaHoraria,
+      professor: this.professor,
+      turma: this.turma
+    };
   }
 
 }

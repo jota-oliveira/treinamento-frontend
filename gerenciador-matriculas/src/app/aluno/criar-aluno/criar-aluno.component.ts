@@ -13,8 +13,6 @@ import { HandleFormBaseComponent } from 'utils/forms/handle-form-base.component'
 })
 export class CriarAlunoComponent extends HandleFormBaseComponent implements OnInit {
 
-  public processandoRequisicao = false;
-
   @Output() alunoCriado: EventEmitter<Aluno> = new EventEmitter();
   @ViewChild(FormAlunoComponent, {static: false}) formComponent: FormAlunoComponent;
 
