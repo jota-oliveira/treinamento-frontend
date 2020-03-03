@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AlunoData } from './services/aluno/aluno-data';
 import { ProfessorData } from './services/professor/professor-data';
+import { DisciplinaData } from './services/disciplina/disciplina-data';
 import { InMemoryDbService } from 'angular-in-memory-web-api';
 
 @Injectable({
@@ -11,7 +12,8 @@ export class MockDataService implements InMemoryDbService {
   createDb() {
     return {
       alunos: AlunoData,
-      professores: ProfessorData
+      professores: ProfessorData,
+      disciplinas: DisciplinaData
     };
   }
 
