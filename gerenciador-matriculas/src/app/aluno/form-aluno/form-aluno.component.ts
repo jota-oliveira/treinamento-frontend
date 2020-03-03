@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Aluno } from 'aluno/entities/aluno';
 import { ValidaCPF } from 'utils/form-validators-customizados';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { PoSelectOption } from '@portinari/portinari-ui';
 import { FormBaseComponent } from 'utils/forms/form-base-component';
 

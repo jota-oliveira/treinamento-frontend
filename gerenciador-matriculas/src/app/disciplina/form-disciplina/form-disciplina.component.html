@@ -1,0 +1,39 @@
+<form [formGroup]="form">
+  <div class="po-row">
+    <po-input
+      class="po-md-4 po-sm-12"
+      formControlName="descricao"
+      p-clean
+      p-required="true"
+      p-icon="po-icon-document-filled"
+      p-label="Descrição"
+    ></po-input>
+
+    <po-input
+      class="po-md-4 po-sm-12"
+      formControlName="sigla"
+      p-clean p-required="true"
+      p-icon="po-icon-document-filled"
+      p-label="Sigla"
+      p-maxlength="4"
+      p-minlength="2"
+    ></po-input>
+
+    <po-number
+      class="po-md-4 po-sm-12"
+      formControlName="cargaHoraria"
+      p-clean p-icon="po-icon-clock"
+      p-required="true"
+      p-label="Carga Horária(horas)"
+    ></po-number>
+  </div>
+  
+  <div class="po-row">
+    <po-button
+      class="po-md-12"
+      p-label="Salvar"
+      [p-disabled]="!form.valid"
+      (p-click)="enviarFormulario()"
+    ></po-button>
+  </div>
+</form>

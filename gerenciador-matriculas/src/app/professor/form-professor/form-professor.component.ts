@@ -1,11 +1,7 @@
-import {
-  Component,
-  OnInit,
-  Input
-} from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Professor } from 'professor/entities/professor';
 import { ValidaCPF } from 'utils/form-validators-customizados';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { FormBaseComponent } from 'utils/forms/form-base-component';
 
 @Component({
