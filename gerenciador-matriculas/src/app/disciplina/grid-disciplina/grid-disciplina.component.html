@@ -1,1 +1,14 @@
-<p>grid-disciplina works!</p>
+<po-table
+  *ngIf="disciplinasComoObjeto.length"
+  [p-columns]="listaColunasGridDisciplinas"
+  [p-items]="disciplinasComoObjeto"
+  p-sort="true"
+  p-striped="true"
+  [p-loading]="processandoRequisicao"
+  [p-actions]="[{
+    action: deletarRegistro,
+    icon: 'po-icon-delete',
+    label: 'Deletar',
+    type: 'danger'
+  }]">
+</po-table>
