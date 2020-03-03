@@ -1,1 +1,17 @@
-<p>editar-disciplina works!</p>
+<po-loading-overlay *ngIf="processandoRequisicao">
+</po-loading-overlay>
+
+<div *ngIf="!(disciplina)">
+  <po-container>
+    <b>Ops! </b> Achamos que você tentou implementar
+    esse formulário de forma errada, por favor, verifique a documentação...
+  </po-container>
+</div>
+
+<div *ngIf="disciplina">
+  <app-form-disciplina
+    (eventoSalvar)="salvar($event)"
+    [disciplina]="disciplina"
+  >
+  </app-form-disciplina>
+</div>
