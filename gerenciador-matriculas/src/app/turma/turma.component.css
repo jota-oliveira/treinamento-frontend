@@ -1,0 +1,20 @@
+.dashboard-turmas-titulo {
+  font-weight: normal;
+  font-size: 1.8em;
+  margin-bottom: 15px;
+}
+
+.btn-nova-turma {
+  position: absolute;
+  right: 0;
+  margin-right: 30px;
+  top: 0;
+}
+
+@media screen and (max-width: 450px) {
+  .btn-nova-turma {
+    position: relative;
+    margin: 15px 0;
+    display: block;
+  }
+}

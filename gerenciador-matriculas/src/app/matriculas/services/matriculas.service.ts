@@ -27,6 +27,7 @@ export class MatriculasService implements MatriculasServiceInterface {
     });
 
     const turma = new Turma({
+      id: null,
       alunos: [],
       anoLetivo: 2020,
       descricao: 'Turma de Sistemas de informação',

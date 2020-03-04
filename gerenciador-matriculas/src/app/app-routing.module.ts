@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { SharedModule } from './shared/shared.module';
 
 const routes: Routes = [
-  { path: '', redirectTo: '', pathMatch: 'full' },
+  { path: '', redirectTo: 'turma', pathMatch: 'full' },
   { path: 'professor', loadChildren: () => import('./professor/professor.module').then(m => m.ProfessorModule) },
   { path: 'aluno', loadChildren: () => import('./aluno/aluno.module').then(m => m.AlunoModule) },
   { path: 'turma', loadChildren: () => import('./turma/turma.module').then(m => m.TurmaModule) },

@@ -1,1 +1,15 @@
-<p>turma works!</p>
+<h1 class="dashboard-turmas-titulo">Dashboard de Turmas</h1>
+
+<po-button
+  class="btn-nova-turma"
+  p-label="Nova turma"
+  (p-click)="novaTurma()"
+>
+</po-button>
+
+<app-grid-turma
+  (turmaRemovida)="removerTurma($event)"
+  *ngIf="!carregandoTurmas"
+  [turmas]="turmas"
+>
+</app-grid-turma>

@@ -1,7 +1,8 @@
 import { Aluno } from '../../aluno/entities/aluno';
 import { Disciplina } from 'disciplina/entities/disciplina';
 
-export interface ObjetoTurma {
+export interface TurmaDTO {
+  id: number;
   descricao: string;
   anoLetivo: number;
   periodoLetivo: number;
