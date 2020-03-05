@@ -20,11 +20,25 @@ export class HttpClientService<T> implements ServiceHttp<T> {
   }
 
   public getList(filter?: object): Observable<T[]> {
-    return this.http.get<T[]>(this.url)
+
+    const query = filter ? this.prepararFiltroUrl(filter) : '';
+
+    return this.http.get<T[]>(`${this.url}/${query}`)
       .pipe(
         retry(2),
         catchError((err: any) => this.handleError(err, 'getList'))
       );
+  }
+
+  private prepararFiltroUrl(filter: object) {
+    const searchFields = Object.keys(filter);
+    const queryUrl = [];
+
+    for (const field of searchFields) {
+      queryUrl.push(`${field}=${filter[field]}`);
+    }
+
+    return searchFields.length ? `?${queryUrl.join('&')}` : '';
   }
 
   public getItem(id: number): Observable<T> {

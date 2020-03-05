@@ -36,6 +36,9 @@ import {
     PoContainerModule,
     PoTableModule,
     DisciplinaRoutingModule
+  ],
+  exports: [
+    CriarDisciplinaComponent
   ]
 })
 export class DisciplinaModule { }

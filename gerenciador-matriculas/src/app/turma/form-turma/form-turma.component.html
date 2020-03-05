@@ -1,0 +1,100 @@
+<form [formGroup]="form" (submit)="enviarFormulario()">
+
+  <po-stepper #stepper>
+    
+    <div class="po-row">
+      <po-step class="po-md-12" p-label="Dados da Turma" [p-can-active-next-step]="habilitarProximoStep.bind(this, 'step1')">        
+        <po-widget p-title="Dados da Turma">
+          <div class="po-row">
+            <po-input class="po-md-3 po-sm-12" formControlName="descricao" (p-change-model)="validarStep('step1')"
+              p-clean p-required="true" p-icon="po-icon-user" p-label="Descrição"
+              p-error-pattern="Este campo é obrigatório"></po-input>
+
+            <po-number class="po-md-3 po-sm-12" formControlName="anoLetivo" p-clean
+              (p-change-model)="validarStep('step1')" p-icon="po-icon-document" p-required="true"
+              p-label="Ano Letivo"></po-number>
+
+            <po-number class="po-md-3 po-sm-12" formControlName="numeroVagas" p-clean
+              (p-change-model)="validarStep('step1')" p-icon="po-icon-document" p-required="true"
+              p-label="Número de Vagas"></po-number>
+
+            <po-number class="po-md-3 po-sm-12" formControlName="periodoLetivo" p-clean p-icon="po-icon-document"
+              p-required="true" (p-change-model)="validarStep('step1')" p-label="Período Letivo"></po-number>
+          </div>
+
+          <div class="po-row">
+            <div class="po-widget-controls">
+              <po-button class="po-md-12" p-label="Próximo" [p-disabled]="!dadosDosSteps.step1.valido"
+                (p-click)="proximoStep('step1')"></po-button>
+            </div>
+          </div>
+        </po-widget>
+      </po-step>
+    </div>
+
+    <div class="po-row">
+      <po-step class="po-md-12" p-label="Definir Disciplinas" [p-can-active-next-step]="habilitarProximoStep.bind(this, 'step2')">
+        <po-widget p-title="Definir Disciplinas">
+          
+          <div class="po-row">
+            <po-multiselect
+              class="po-md-6"
+              appSearchOnType
+              [searchFunction]="filtrarDisciplinas.bind(this)"
+              name="disciplinas"
+              formControlName="disciplinas"
+              p-label="Selecionar disciplinas"
+              [p-options]="disciplinaOptions"
+              p-filter-mode="contains"
+              (p-change)="validarStep('step2')"
+            ></po-multiselect>
+
+            <po-modal #criarDisciplina p-title="Criar disciplina">
+              <app-criar-disciplina></app-criar-disciplina>
+            </po-modal>
+
+            <po-button
+              class="po-md-6 btn-abrir-modal"
+              p-label="Criar uma disciplina"
+              (p-click)="criarDisciplina.open()"
+            ></po-button>
+          </div>
+          
+          <div class="po-widget-controls">
+            <po-button class="po-md-6" p-label="Anterior" (p-click)="stepAnterior()"></po-button>
+
+            <po-button class="po-md-6" p-label="Próximo" [p-disabled]="!dadosDosSteps.step2.valido"
+              (p-click)="proximoStep('step2')"></po-button>
+          </div>
+        </po-widget>
+      </po-step>
+    </div>
+
+    <div class="po-row">
+      <po-step class="po-md-12" p-label="Inserir Alunos" [p-can-active-next-step]="habilitarProximoStep.bind(this, 'step3')">
+        <div class="po-row">
+          <po-widget class="po-lg-12" p-title="Alunos">
+            <po-multiselect
+              appSearchOnType
+              [searchFunction]="filtrarAlunos.bind(this)"
+              name="alunos"
+              formControlName="alunos"
+              p-label="Selecionar alunos"
+              [p-options]="alunoOptions"
+              (p-change)="validarStep('step3')"
+              p-filter-mode="contains"
+            ></po-multiselect>
+
+            <div class="po-widget-controls">
+              <po-button class="po-md-6" p-label="Anterior" (p-click)="stepAnterior()"></po-button>
+              <po-button class="po-md-6" p-label="Salvar" [p-disabled]="!form.valid" (p-click)="enviarFormulario()">
+              </po-button>
+            </div>
+
+          </po-widget>
+        </div>
+      </po-step>
+    </div>
+
+  </po-stepper>
+</form>

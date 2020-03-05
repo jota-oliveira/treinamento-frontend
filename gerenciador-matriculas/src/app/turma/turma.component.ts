@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Turma } from './entities/turma';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NotificacaoFactoryService } from 'services/notificacoes/notificacao-factory.service';
 import { TurmaDTO } from './entities/turma-dto.interface';
 
@@ -18,7 +18,8 @@ export class TurmaComponent implements OnInit {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private notificacao: NotificacaoFactoryService
+    private notificacao: NotificacaoFactoryService,
+    private router: Router
   ) {
     this.bindObservables();
   }
@@ -51,8 +52,7 @@ export class TurmaComponent implements OnInit {
   }
 
   public novaTurma = (): void => {
-    console.log('abrir nova turma');
-    alert('Nova turma em breve!');
+    this.router.navigateByUrl('/turma/nova-turma');
   }
 
   private bindObservables(): void {
