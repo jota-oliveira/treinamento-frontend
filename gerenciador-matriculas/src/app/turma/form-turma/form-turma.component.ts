@@ -6,6 +6,9 @@ import { DisciplinaService } from 'disciplina/services/disciplina.service';
 import { NotificacaoFactoryService } from 'services/notificacoes/notificacao-factory.service';
 import { Turma } from 'turma/entities/turma';
 import { TurmaDTO } from 'turma/entities/turma-dto.interface';
+import { Observable } from 'rxjs';
+import { Aluno } from 'aluno/entities/aluno';
+import { Disciplina } from 'disciplina/entities/disciplina';
 
 @Component({
   selector: 'app-form-turma',
@@ -34,14 +37,8 @@ export class FormTurmaComponent implements OnInit {
   };
 
   public dadosDosSteps = {...this.defaultDadosDosSteps};
-
-  public alunoOptions: Array<PoMultiselectOption> = [
-    { value: 'portinariMultiselect1', label: 'Portinari Multiselect 1' }
-  ];
-
-  public disciplinaOptions: Array<PoMultiselectOption> = [
-    { value: 'portinariMultiselect1', label: 'Portinari Multiselect 1' }
-  ];
+  public alunoOptions: Array<PoMultiselectOption> = [];
+  public disciplinaOptions: Array<PoMultiselectOption> = [];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -61,14 +58,7 @@ export class FormTurmaComponent implements OnInit {
       nome: pesquisa
     })
       .subscribe(
-        alunos => {
-        this.alunoOptions = [
-          ...this.alunoOptions,
-          ...alunos.map(aluno => (
-            { value: aluno.id, label: aluno.nome }
-          ))
-        ];
-        },
+        alunos => this.adicionarAlunosOptions(alunos),
         erro => {
           this.notificacao.mensagemErro(erro);
         }
@@ -80,21 +70,57 @@ export class FormTurmaComponent implements OnInit {
       descricao: pesquisa
     })
       .subscribe(
-        disciplinas => {
-          this.disciplinaOptions = [
-            ...this.disciplinaOptions,
-            ...disciplinas.map(disciplina => (
-              { value: disciplina.id, label: disciplina.descricao }
-            ))
-          ];
-        },
+        disciplinas => this.adicionarDisciplinaOptions(disciplinas),
         erro => {
           this.notificacao.mensagemErro(erro);
         }
       );
   }
 
+  private adicionarAlunosOptions(alunos: Aluno[]): void {
+    this.alunoOptions = [
+      ...this.alunoOptions,
+      ...alunos
+        .map(aluno => ({ value: aluno.id, label: aluno.nome }))
+    ];
+  }
+
+  private adicionarDisciplinaOptions(disciplinas: Disciplina[]): void {
+    this.disciplinaOptions = [
+      ...this.disciplinaOptions,
+      ...disciplinas.map(disciplina => (
+        { value: disciplina.id, label: disciplina.descricao }
+      ))
+    ];
+  }
+
+  private buscarAlunosOptions(): void {
+    this.alunoService
+      .getList()
+      .subscribe(
+        (alunos: Aluno[]) => this.adicionarAlunosOptions(
+          alunos.slice(0, 3)
+        ),
+        (erro: string) => this.notificacao.mensagemErro(erro)
+      );
+  }
+
+  private buscarDisciplinasOptions(): void {
+    this.disciplinaService
+      .getList()
+      .subscribe(
+        (disciplinas: Disciplina[]) => this.adicionarDisciplinaOptions(
+          disciplinas.slice(0, 3)
+        ),
+        (erro: string) => this.notificacao.mensagemErro(erro)
+      );
+  }
+
   private buscarDadosIniciaisDoFormulario(): Turma {
+
+    this.buscarAlunosOptions();
+    this.buscarDisciplinasOptions();
+
     return new Turma({
       id: null,
       alunos: [],

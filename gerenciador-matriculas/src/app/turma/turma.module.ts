@@ -19,6 +19,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { SearchOnTypeDirective } from './search-on-type.directive';
 import { FormTurmaComponent } from './form-turma/form-turma.component';
 import { DisciplinaModule } from 'disciplina/disciplina.module';
+import { AlunoModule } from 'aluno/aluno.module';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import { DisciplinaModule } from 'disciplina/disciplina.module';
     PoWidgetModule,
     PoInfoModule,
     TurmaRoutingModule,
-    DisciplinaModule
+    DisciplinaModule,
+    AlunoModule
   ]
 })
 export class TurmaModule { }

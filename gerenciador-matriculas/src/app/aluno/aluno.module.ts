@@ -37,6 +37,9 @@ import {
     AlunoRoutingModule,
     ReactiveFormsModule,
     SharedModule
+  ],
+  exports: [
+    CriarAlunoComponent
   ]
 })
 export class AlunoModule { }
