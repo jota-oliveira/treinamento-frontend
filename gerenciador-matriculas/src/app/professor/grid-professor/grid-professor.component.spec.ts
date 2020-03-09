@@ -1,25 +1,25 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+// import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GridProfessorComponent } from './grid-professor.component';
+// import { GridProfessorComponent } from './grid-professor.component';
 
-describe('GridProfessorComponent', () => {
-  let component: GridProfessorComponent;
-  let fixture: ComponentFixture<GridProfessorComponent>;
+// describe('GridProfessorComponent', () => {
+//   let component: GridProfessorComponent;
+//   let fixture: ComponentFixture<GridProfessorComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ GridProfessorComponent ]
-    })
-    .compileComponents();
-  }));
+//   beforeEach(async(() => {
+//     TestBed.configureTestingModule({
+//       declarations: [ GridProfessorComponent ]
+//     })
+//     .compileComponents();
+//   }));
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(GridProfessorComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+//   beforeEach(() => {
+//     fixture = TestBed.createComponent(GridProfessorComponent);
+//     component = fixture.componentInstance;
+//     fixture.detectChanges();
+//   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+//   it('should create', () => {
+//     expect(component).toBeTruthy();
+//   });
+// });

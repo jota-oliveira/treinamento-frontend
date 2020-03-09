@@ -37,6 +37,15 @@ export class Aluno extends Pessoa implements Modelo {
     return [...this._turma];
   }
 
+  public adicionaTurma(turma: Turma) {
+    this._turma.push(turma);
+  }
+
+  public removeTurma(turma: Turma) {
+    this._turma = this._turma
+      .filter(turmaCadastrada => turmaCadastrada !== turma);
+  }
+
   public toObjectDTO(): AlunoDTO {
     const objetoPessoa = super.toObjectDTO();
 

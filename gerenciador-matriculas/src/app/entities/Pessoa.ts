@@ -1,6 +1,7 @@
 import { PessoaDTO } from './pessoa-dto.interface';
 import { Validacoes } from 'utils/validacoes.helper';
 import { Modelo } from './modelo.interface';
+import { TurmasResolver } from 'turma/turmas.resolver';
 
 export abstract class Pessoa implements Modelo {
 
@@ -52,7 +53,7 @@ export abstract class Pessoa implements Modelo {
   }
 
   private stringContemApenasDigitos(item: string): void {
-    const patternApenasNumeros = /^[0-9]/;
+    const patternApenasNumeros = /^\d+$/;
 
     if (!patternApenasNumeros.test(item)) {
       throw new Error('Por favor, informe apenas os dígitos do CPF');
@@ -61,12 +62,16 @@ export abstract class Pessoa implements Modelo {
 
   private cpfValido = (cpf: string = null): void => {
     if (cpf) {
-      try {
-          this.stringContemApenasDigitos(cpf);
-          if (!Validacoes.validaCPF(cpf)) { throw new Error('CPF inválido'); }
-      } catch (error) {
-        throw new Error(error);
-      }
+      return this.verificarCPF(cpf);
+    }
+  }
+
+  private verificarCPF(cpf: string) {
+    try {
+      this.stringContemApenasDigitos(cpf);
+      if (!Validacoes.validaCPF(cpf)) { throw new Error('CPF inválido'); }
+    } catch (error) {
+      throw error;
     }
   }
 

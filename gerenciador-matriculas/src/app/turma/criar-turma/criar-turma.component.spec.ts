@@ -1,25 +1,25 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+// import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CriarTurmaComponent } from './criar-turma.component';
+// import { CriarTurmaComponent } from './criar-turma.component';
 
-describe('CriarTurmaComponent', () => {
-  let component: CriarTurmaComponent;
-  let fixture: ComponentFixture<CriarTurmaComponent>;
+// describe('CriarTurmaComponent', () => {
+//   let component: CriarTurmaComponent;
+//   let fixture: ComponentFixture<CriarTurmaComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ CriarTurmaComponent ]
-    })
-    .compileComponents();
-  }));
+//   beforeEach(async(() => {
+//     TestBed.configureTestingModule({
+//       declarations: [ CriarTurmaComponent ]
+//     })
+//     .compileComponents();
+//   }));
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(CriarTurmaComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+//   beforeEach(() => {
+//     fixture = TestBed.createComponent(CriarTurmaComponent);
+//     component = fixture.componentInstance;
+//     fixture.detectChanges();
+//   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+//   it('should create', () => {
+//     expect(component).toBeTruthy();
+//   });
+// });

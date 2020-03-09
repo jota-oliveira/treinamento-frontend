@@ -1,12 +1,12 @@
-import { TestBed } from '@angular/core/testing';
+// import { TestBed } from '@angular/core/testing';
 
-import { DisciplinaService } from './disciplina.service';
+// import { DisciplinaService } from './disciplina.service';
 
-describe('DisciplinaService', () => {
-  beforeEach(() => TestBed.configureTestingModule({}));
+// describe('DisciplinaService', () => {
+//   beforeEach(() => TestBed.configureTestingModule({}));
 
-  it('should be created', () => {
-    const service: DisciplinaService = TestBed.get(DisciplinaService);
-    expect(service).toBeTruthy();
-  });
-});
+//   it('should be created', () => {
+//     const service: DisciplinaService = TestBed.get(DisciplinaService);
+//     expect(service).toBeTruthy();
+//   });
+// });

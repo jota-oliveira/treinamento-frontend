@@ -7,7 +7,7 @@ export abstract class Validacoes {
       verificarQuantidadeDeDigitosPadrao(cpf);
       cpfValido = digitosVerificadoresConferem(cpf);
     } catch (error) {
-      throw new Error(error);
+      throw error;
     }
 
     return cpfValido;

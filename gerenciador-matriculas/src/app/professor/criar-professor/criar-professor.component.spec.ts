@@ -1,25 +1,25 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+// import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CriarProfessorComponent } from './criar-professor.component';
+// import { CriarProfessorComponent } from './criar-professor.component';
 
-describe('CriarProfessorComponent', () => {
-  let component: CriarProfessorComponent;
-  let fixture: ComponentFixture<CriarProfessorComponent>;
+// describe('CriarProfessorComponent', () => {
+//   let component: CriarProfessorComponent;
+//   let fixture: ComponentFixture<CriarProfessorComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ CriarProfessorComponent ]
-    })
-    .compileComponents();
-  }));
+//   beforeEach(async(() => {
+//     TestBed.configureTestingModule({
+//       declarations: [ CriarProfessorComponent ]
+//     })
+//     .compileComponents();
+//   }));
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(CriarProfessorComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+//   beforeEach(() => {
+//     fixture = TestBed.createComponent(CriarProfessorComponent);
+//     component = fixture.componentInstance;
+//     fixture.detectChanges();
+//   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+//   it('should create', () => {
+//     expect(component).toBeTruthy();
+//   });
+// });
