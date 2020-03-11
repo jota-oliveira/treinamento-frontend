@@ -171,7 +171,6 @@ export class FormTurmaComponent implements OnInit {
   }
 
   public habilitarProximoStep(nomeStep: string): boolean {
-    return true;
     return this.dadosDosSteps[nomeStep].valido;
   }
 

@@ -43,7 +43,7 @@ describe('AlunoService', () => {
       expect(response.length).toEqual(1);
     });
 
-    const httpRequest = httpMock.expectOne('api/alunos/');
+    const httpRequest = httpMock.expectOne('api/alunos');
 
     expect(httpRequest.request.method).toEqual('GET');
     expect(httpRequest.request.responseType).toEqual('json');
@@ -74,6 +74,24 @@ describe('AlunoService', () => {
 
     expect(httpRequest.request.method).toEqual('GET');
     expect(httpRequest.request.responseType).toEqual('json');
+
+    httpRequest.flush(mockAluno);
+  });
+
+  it('deve alterar um aluno', () => {
+
+    alunoService
+      .put(mockAluno)
+      .subscribe((response) => {
+        console.log(response);
+      });
+
+    const httpRequest = httpMock.expectOne('api/alunos');
+
+    expect(httpRequest.request.method).toEqual('PUT');
+    expect(httpRequest.request.responseType).toEqual('json');
+
+    console.log(httpRequest.request);
 
     httpRequest.flush(mockAluno);
   });

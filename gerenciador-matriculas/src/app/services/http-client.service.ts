@@ -23,7 +23,7 @@ export class HttpClientService<T> implements ServiceHttp<T> {
 
     const query = filter ? this.prepararFiltroUrl(filter) : '';
 
-    return this.http.get<T[]>(`${this.url}/${query}`)
+    return this.http.get<T[]>(`${this.url}${query}`)
       .pipe(
         retry(2),
         catchError((err: any) => this.handleError(err, 'getList'))
