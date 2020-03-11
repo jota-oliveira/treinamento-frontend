@@ -26,11 +26,6 @@ const routes: Routes = [
         .then(m => m.DisciplinaModule)
   },
   {
-    path: 'matriculas', loadChildren: () =>
-      import('./matriculas/matriculas.module')
-        .then(m => m.MatriculasModule)
-  },
-  {
     path: 'shared', loadChildren: () =>
       import('./shared/shared.module')
         .then(m => m.SharedModule)
