@@ -5,7 +5,6 @@ import {
 import { TestBed } from '@angular/core/testing';
 import { AlunoService } from './aluno.service';
 import { Aluno } from 'aluno/entities/aluno';
-import { AlunoDTO } from 'aluno/entities/aluno-dto.interface';
 
 describe('AlunoService', () => {
 
@@ -36,7 +35,7 @@ describe('AlunoService', () => {
     httpMock = TestBed.get(HttpTestingController);
   });
 
-  it('Deve buscar uma lista de alunos do servidor', () => {
+  it('deve buscar uma lista de alunos do servidor', () => {
     alunoService
     .getList()
     .subscribe((response: Aluno[]) => {
@@ -51,7 +50,7 @@ describe('AlunoService', () => {
     httpRequest.flush(mockListaDeAlunos);
   });
 
-  it('Deve buscar apenas um aluno do servidor', () => {
+  it('deve buscar apenas um aluno do servidor', () => {
     alunoService
       .getItem(1)
       .subscribe((aluno) => {
@@ -79,21 +78,86 @@ describe('AlunoService', () => {
   });
 
   it('deve alterar um aluno', () => {
-
     alunoService
-      .put(mockAluno)
+      .put(mockAluno.toObjectDTO())
       .subscribe((response) => {
-        console.log(response);
+        expect(response.mensagem).toBe('Sucesso na operação');
+        expect(response.sucesso).toBeTruthy();
       });
 
     const httpRequest = httpMock.expectOne('api/alunos');
 
     expect(httpRequest.request.method).toEqual('PUT');
     expect(httpRequest.request.responseType).toEqual('json');
+    expect(httpRequest.request.headers.get('Content-Type')).toBe('application/json');
 
-    console.log(httpRequest.request);
+    httpRequest.flush([]);
+  });
 
-    httpRequest.flush(mockAluno);
+  it('deve deletar um aluno', () => {
+    alunoService
+      .delete(1)
+      .subscribe((response) => {
+        expect(response.mensagem).toBe('Sucesso na operação');
+        expect(response.sucesso).toBeTruthy();
+      });
+
+    const httpRequest = httpMock.expectOne('api/alunos/1');
+
+    expect(httpRequest.request.method).toEqual('DELETE');
+    expect(httpRequest.request.responseType).toEqual('json');
+    expect(httpRequest.request.headers.get('Content-Type')).toBe('application/json');
+
+    httpRequest.flush([]);
+  });
+
+  it('deve criar um aluno', () => {
+    alunoService
+      .post(mockAluno)
+      .subscribe((response) => {
+        expect(response.mensagem).toBe('Sucesso na operação');
+        expect(response.sucesso).toBeTruthy();
+      });
+
+    const httpRequest = httpMock.expectOne('api/alunos');
+
+    expect(httpRequest.request.method).toEqual('POST');
+    expect(httpRequest.request.responseType).toEqual('json');
+    expect(httpRequest.request.headers.get('Content-Type')).toBe('application/json');
+
+    httpRequest.flush([]);
+  });
+
+  it('método prepararPostResponse deve retornar o id do objeto criado', () => {
+    const postResponse = alunoService['prepararPostResponse']({
+      sucesso: true,
+      mensagem: 'Sucesso na operação',
+      id: 1
+    });
+
+    expect(typeof(postResponse)).toBe('object');
+    expect(Object.keys(postResponse).includes('detalhes')).toBeTruthy();
+
+    const detalhes: any = postResponse.detalhes;
+    expect(typeof(detalhes.id) === 'number').toBeTruthy();
+  });
+
+  it('método prepararFiltroUrl deve retornar um filtro de url', () => {
+    const parametroDeUrl = alunoService['prepararFiltroUrl']({
+      parametro1: 'teste',
+      parametro2: 2,
+      parametro3: []
+    });
+
+    expect(parametroDeUrl).toEqual('?parametro1=teste&parametro2=2&parametro3=');
+  });
+
+  it('método handleError deve tratar as falhas de requisição http', () => {
+    expect(() => alunoService['handleError']({
+      status: 404,
+      statusText: 'Não encontrado'
+    }, 'método x'))
+      .toThrowError('Não foi possível fazer a requisição, tente novamente mais tarde');
   });
 
 });
