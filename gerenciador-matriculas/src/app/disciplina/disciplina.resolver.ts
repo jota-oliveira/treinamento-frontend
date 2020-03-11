@@ -2,7 +2,11 @@ import { Resolve, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/r
 import { DisciplinaService } from 'disciplina/services/disciplina.service';
 import { Observable, of } from 'rxjs';
 import { Disciplina } from 'disciplina/entities/disciplina';
+import { Injectable } from '@angular/core';
 
+@Injectable({
+  providedIn: 'root'
+})
 export class DisciplinaResolver implements Resolve<Observable<Disciplina>> {
 
   constructor(private disciplinaService: DisciplinaService) { }
