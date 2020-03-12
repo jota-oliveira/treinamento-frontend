@@ -31,16 +31,16 @@ export class FormAlunoComponent extends FormBaseComponent implements OnInit {
 
     return new Aluno({
       id: null,
-      nome: '',
-      email: '',
+      nome: null,
+      email: null,
       cpf: null,
       matricula: null,
-      formaIngresso: '',
-      turma: []
+      formaIngresso: null,
+      turma: null
     });
   }
 
-  private criarFormulario(aluno: Aluno) {
+  private criarFormulario(aluno: Aluno): void {
     this.opcoesFormaDeIngresso = this.getOpcoesFormaDeIngresso();
 
     this.form = this.formBuilder.group({
