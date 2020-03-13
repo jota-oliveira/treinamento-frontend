@@ -49,12 +49,13 @@
   </div>
   
   <div class="po-row">
-    <po-button
-      id="botaoSalvar"
-      class="po-md-12"
-      p-label="Salvar"
-      [p-disabled]="!form.valid"
-      (p-click)="enviarFormulario()">
-    </po-button>
+    <div id="botaoSalvar">
+      <po-button
+        class="po-md-12"
+        p-label="Salvar"
+        [p-disabled]="!form.valid"
+        (p-click)="enviarFormulario()">
+      </po-button>
+    </div>
   </div>
 </form>
